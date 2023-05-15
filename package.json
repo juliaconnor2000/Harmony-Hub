@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client",
+    "e2e"
+  ],
+  "scripts": {
+    "build:client": "yarn workspace julia-project-client build",
+    "dev": "yarn workspace julia-project-server dev",
+    "dev:debug": "yarn workspace julia-project-server dev:debug",
+    "heroku-postbuild": "yarn workspace julia-project-client build",
+    "start": "yarn workspace julia-project-server start",
+    "dev:cypress": "yarn workspace julia-project-server dev:e2e",
+    "e2e:open": "yarn workspace julia-project-e2e e2e:open",
+    "e2e:run": "yarn workspace julia-project-e2e e2e:run"
+  },
+  "engines": {
+    "node": "^16.18"
+  }
+}
