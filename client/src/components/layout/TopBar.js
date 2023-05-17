@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import SignOutButton from "../authentication/SignOutButton";
 
 const TopBar = ({ user }) => {
+
   const unauthenticatedListItems = [
     <li key="sign-in">
       <Link to="/user-sessions/new">Sign In</Link>
@@ -15,6 +16,9 @@ const TopBar = ({ user }) => {
   ];
 
   const authenticatedListItems = [
+    // <li>
+    //   <Link to="/profile">Welcome Name</Link>
+    // </li>,
     <li key="sign-out">
       <SignOutButton />
     </li>,

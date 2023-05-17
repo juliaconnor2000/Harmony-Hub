@@ -2,6 +2,10 @@
 const Bcrypt = require("bcrypt");
 const unique = require("objection-unique");
 const Model = require("./Model");
+const findOrCreate = require("mongoose-findorcreate")
+const SpotifyStrategy = require('passport-spotify').Strategy;
+const passport = require('passport')
+
 
 const saltRounds = 10;
 
@@ -30,6 +34,7 @@ class User extends uniqueFunc(Model) {
       properties: {
         email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
         cryptedPassword: { type: "string" },
+        spotifyId: { type: ["string", "integer"] }
       },
     };
   }
