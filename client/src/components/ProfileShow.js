@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TrackTile from "./TrackTile.js";
 // import { Track } from "../../../server/src/models/index.js"
 
 const ProfileShow = props => {
@@ -21,13 +22,32 @@ const ProfileShow = props => {
     useEffect(() => {
         getTracks()
     }, [])
-
     console.log(tracks)
+
+    const trackTiles = tracks.length > 0 ? (
+        tracks.map((track) => (
+            <TrackTile
+                key={track.id}
+                id={track.id}
+                name={track.name}
+                artist={track.artist}
+                albumArt={track.albumArt}
+                //userId={track.userId}
+            />
+        ))
+    ) : (
+        <a href="/auth/spotify" className="button">Download Songs From Spotify</a>
+    )
+
+    // tracks
+
+    // console.log(tracks)
 
     return (
         <>
-            <a href="/auth/spotify" className="button">Download Songs From Spotify</a>
+            {/* <a href="/auth/spotify" className="button">Download Songs From Spotify</a> */}
             {/* {user.email} */}
+            {trackTiles}
             {/* profilepic
             name
             followers/following
