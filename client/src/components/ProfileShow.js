@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from "react";
+// import { Track } from "../../../server/src/models/index.js"
 
 const ProfileShow = props => {
 
-    //     const getUserInfo = async () => {
-    //     try {
-    //         // swap this with a fetch request to spotifyRouter
-    //         // const response = await fetch (`/api/v1/authSpotifyRouter`, {
-    //         const response = await fetch (`/auth/spotify`, {
-    //             // body: JSON.stringify(response)
-    //         })
-    //         if (!response.ok) {
-    //             throw(new Error(`${response.status} (${response.statusText})`))
-    //         }
-    //         const body = await response.json()
-    //         console.log(body)
-    //         // setUserInfo(body)
-    //         // setShouldRedirect(true) //brings us to profile page
-    //     } catch (err) {
-    //         console.log(`Error in getUserInfo fetch: ${err.message}`)
-    //     }
-    //     }
-    
-    // useEffect(() => {
-    //     getUserInfo()
-    // }, [])
+    const [tracks, setTracks] = useState([])
+
+    const getTracks = async() => {
+        try {
+            const response = await fetch (`/api/v1/tracks`)
+            if (!response.ok) {
+                throw(new Error(`${response.status} (${response.statusText})`))
+            }
+            const body = await response.json()
+            setTracks(body.tracks)
+        } catch (err) {
+            console.log(`Error in getTracks fetch: ${err.message}`)
+        }
+    }
+
+    useEffect(() => {
+        getTracks()
+    }, [])
+
+    console.log(tracks)
 
     return (
         <>

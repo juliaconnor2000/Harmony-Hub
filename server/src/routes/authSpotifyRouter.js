@@ -95,7 +95,8 @@ authSpotifyRouter.get('/callback', function(req, res) {
                 // Save tracks to the database
                 const savedTracks = await Track.query().insert(tracks);
                 console.log(`${savedTracks.length} tracks saved successfully.`);
-                res.status(200).json({ message: "Tracks saved successfully" });
+                // res.status(200).json({ message: "Tracks saved successfully" });
+                res.redirect('/profile-page')
               } catch (error) {
                 console.error(`Error saving tracks: ${error.message}`);
                 res.status(500).json({ error: "Internal server error" });
