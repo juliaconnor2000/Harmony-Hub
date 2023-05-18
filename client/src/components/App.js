@@ -25,12 +25,16 @@ const App = (props) => {
     fetchCurrentUser()
   }, [])
 
+  // console.log(currentUser)
+
   return (
     <Router>
       <TopBar user={currentUser} />
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/profile-page" component={ProfileShow} user={currentUser}/>
+        <Route exact path="/profile-page">
+          <ProfileShow currentUser={currentUser}/>
+        </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
       </Switch>

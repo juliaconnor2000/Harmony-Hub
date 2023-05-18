@@ -1,7 +1,103 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
-// place global css here
+
+body {
+  background-color: rgb(255, 204, 252);
+}
+
+.top-songs-text {
+  width: 40%;
+  font-size: 20px;
+  text-align: center;
+}
+
+.top-bar {
+  background-color: rgb(255, 150, 253);
+}
+
+.top-bar ul {
+  background-color:rgb(255, 150, 253);
+}
+
+.download-section a {
+  font-size: x-large;
+}
+
+.download-section {
+  font-size: 20px;
+  margin: auto;
+  margin-top: 40px;
+  text-align: center;
+}
+
+a {
+  color: rgb(255, 24, 216);
+}
+
+.button {
+  background-color: rgb(255, 38, 244)
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+}
+
+.profile-image {
+  margin: 40px;
+  border-radius: 400px;
+  display: flex;
+  width: 25%;
+}
+
+.profile-text-section {
+  margin: 10px;
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* Display children in a column */
+  align-items: center; /* Center align children horizontally */
+  text-align: center;
+  font-size: 200%;
+}
+
+.song-tile {
+  margin: 10px;
+  padding: 10px;
+  flex: 1;
+  // min-width: 300px; 
+  display: flex;
+  flex-direction: column; /* Display children in a column */
+  align-items: center; /* Center align children horizontally */
+  text-align: center;
+  background-color: rgb(255, 231, 253);
+  border: 2px solid;
+  border-radius: 10px;
+}
+
+.img-format {
+  width: 150px;
+  height: 150px;
+}
+
+.tile-text {
+  max-width: 100%; 
+  min-width: 150px;
+  max-width: 150px; /* Adjust the maximum width as per your preference */
+  word-wrap: break-word; /* Allow long words to break and wrap to the next line */
+  overflow: hidden; /* Hide any overflowed text */
+  text-overflow: ellipsis; /* Add ellipsis (...) for truncated text */
+}
+
 *,
 *::before,
 *::after {
