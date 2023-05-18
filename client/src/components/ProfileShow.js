@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import TrackTile from "./TrackTile.js";
-// import { Track } from "../../../server/src/models/index.js"
 
 const ProfileShow = props => {
 
@@ -22,7 +21,6 @@ const ProfileShow = props => {
     useEffect(() => {
         getTracks()
     }, [])
-    console.log(tracks)
 
     const trackTiles = tracks.length > 0 ? (
         tracks.map((track) => (
@@ -36,24 +34,46 @@ const ProfileShow = props => {
             />
         ))
     ) : (
-        <a href="/auth/spotify" className="button">Download Songs From Spotify</a>
+        <div className="download-section">
+            <a href="/auth/spotify" className="button download-button">Download Songs From Spotify</a>
+            <p>To access your profile, please download your songs from Spotify!</p>
+        </div>
     )
 
-    // tracks
+    let profileInfoSection = null
 
-    // console.log(tracks)
+    console.log(props.currentUser)
+
+    if (props.currentUser && props.currentUser.profilePicture) {
+        profileInfoSection = (
+            <div className="profile-container">
+                <img src={props.currentUser.profilePicture} alt={`${props.currentUser.displayName} Spotify Profile Picture`} className="profile-image"/>
+                <div className="profile-text-section">
+                    <p className="profile-text">Name: {props.currentUser.displayName}</p>
+                    <p className="profile-text">Email: {props.currentUser.email}</p>
+                </div>
+            </div>
+        )
+    }
+
+    let topSongs = null
+    if (profileInfoSection) {
+        topSongs = (
+            <p className="top-songs-text">Your top songs</p>
+        )
+
+    }
 
     return (
-        <>
-            {/* <a href="/auth/spotify" className="button">Download Songs From Spotify</a> */}
-            {/* {user.email} */}
-            {trackTiles}
-            {/* profilepic
-            name
-            followers/following
-            songs youve been listening to
-            recommendations youve been given */}
-        </>
+        <div>
+            {profileInfoSection}
+            {/* <p>Your Top Songs</p> */}
+            {topSongs}
+            <div className="container">
+                {trackTiles}
+            </div>
+            {/* <p>recommendations under each song prolly</p> */}
+        </div>
     )
 }
 

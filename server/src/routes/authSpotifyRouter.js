@@ -3,7 +3,7 @@ import request from "request";
 import querystring from "node:querystring"
 import dotenv from "dotenv";
 // import Track from '../models/Track.js'
-import {Track} from '../models/index.js'
+import {Track, User} from '../models/index.js'
 // import getCurrentUser from "../../../client/src/services/getCurrentUser.js";
 dotenv.config();
 var client_id= process.env.CLIENT_ID
@@ -29,6 +29,8 @@ const authSpotifyRouter = new express.Router();
 // authGoogleRouter.get('/', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 authSpotifyRouter.get('/', function(req, res) {
+  // console.log(req.user)
+  // console.log(req.user.email)
   var state = generateRandomString(16);
   var scope = 'user-read-private user-read-email user-top-read';
   
@@ -96,7 +98,63 @@ authSpotifyRouter.get('/callback', function(req, res) {
                 const savedTracks = await Track.query().insert(tracks);
                 console.log(`${savedTracks.length} tracks saved successfully.`);
                 // res.status(200).json({ message: "Tracks saved successfully" });
-                res.redirect('/profile-page')
+
+                var userOptions = {
+                  url: 'https://api.spotify.com/v1/me',
+                  headers: { 'Authorization': 'Bearer ' + access_token },
+                  json: true
+                };
+
+                request.get(userOptions, async function(error, response, body) {
+                  if (!error && response.statusCode === 200) {
+                    console.log(body)
+                    console.log(body.display_name)
+
+                    // try {
+                    //   await User.query().findById(req.user.id).update({
+                    //     ...
+                    //   })
+                      // user.$query().update({
+                      //   ...user,
+                      //   profilePicture: body.images[0].url,
+                      //   displayName: body.display_name
+                      // })
+                      try {
+                        const user = await User.query().findById(req.user.id);
+                        if (user) {
+                          user.displayName = body.display_name; // Update the displayName property
+                          user.profilePicture = body.images[0].url; // Update the profilePicture property
+                          await user.$query().patch(); // Save the updated user record
+                          console.log('User profile updated successfully');
+                      res.redirect('/profile-page')
+                        } else {
+                          console.error('User not found');
+                          res.status(404).json({ error: 'User not found' });
+                        } 
+                      } catch (error) {
+                          console.error('Error updating user profile:', error.message);
+                          res.status(500).json({ error: 'Internal server error' });
+                        }
+
+                      
+                    // }else {
+                    //   console.error('User not found');
+                    //   res.status(404).json({ error: 'User not found' });
+                    // }
+                  // } catch (error) {
+                  //   console.error('Error updating user profile:', error.message);
+                  //   res.status(500).json({ error: 'Internal server error' });
+                  // }
+
+
+
+                    // res.redirect('/profile-page')
+
+                  }
+                })
+
+
+                // res.redirect('/profile-page')
               } catch (error) {
                 console.error(`Error saving tracks: ${error.message}`);
                 res.status(500).json({ error: "Internal server error" });

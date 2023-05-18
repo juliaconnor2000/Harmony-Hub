@@ -47,6 +47,7 @@
     "webpack-hot-middleware": "^2.25.3"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
@@ -59,6 +60,7 @@
     "mongodb": "^5.5.0",
     "mongoose-findorcreate": "^4.0.0",
     "morgan": "^1.10.0",
+    "node-fetch": "^3.3.1",
     "objection": "^3.0.1",
     "objection-unique": "^1.2.2",
     "passport": "~0.5.0",
