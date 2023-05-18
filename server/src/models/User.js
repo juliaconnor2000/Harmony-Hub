@@ -34,7 +34,9 @@ class User extends uniqueFunc(Model) {
       properties: {
         email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
         cryptedPassword: { type: "string" },
-        spotifyId: { type: ["string", "integer"] }
+        spotifyId: { type: ["string", "integer"] },
+        displayName: { type: "string" },
+        profilePicture: { type: "string" }
       },
     };
   }
