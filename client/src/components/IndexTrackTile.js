@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const IndexTrackTile = (props) => {
-    // console.log(props)
 
     const [user, setUser] = useState([])
 
@@ -15,15 +14,13 @@ const IndexTrackTile = (props) => {
             const body = await response.json()
             setUser(body.user)
         } catch (err) {
-            console.log(`Error in getTracks fetch: ${err.message}`)
+            console.log(`Error in getUser fetch: ${err.message}`)
         }
     }
   
     useEffect(() => {
         getUser()
     }, [])
-
-    // console.log(user)
 
     return (
         <div className="song-tile">
