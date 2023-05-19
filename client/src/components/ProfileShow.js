@@ -3,34 +3,33 @@ import TrackTile from "./TrackTile.js";
 
 const ProfileShow = props => {
 
-    const [tracks, setTracks] = useState([])
+    const [userTracks, setUserTracks] = useState([])
 
-    const getTracks = async() => {
+    const getUserTracks = async() => {
         try {
-            const response = await fetch (`/api/v1/tracks`)
+            const response = await fetch (`/api/v1/tracks/user`)
             if (!response.ok) {
                 throw(new Error(`${response.status} (${response.statusText})`))
             }
             const body = await response.json()
-            setTracks(body.tracks)
+            setUserTracks(body.tracks)
         } catch (err) {
-            console.log(`Error in getTracks fetch: ${err.message}`)
+            console.log(`Error in getUserTracks fetch: ${err.message}`)
         }
     }
 
     useEffect(() => {
-        getTracks()
+        getUserTracks()
     }, [])
 
-    const trackTiles = tracks.length > 0 ? (
-        tracks.map((track) => (
+    const trackTiles = userTracks.length > 0 ? (
+        userTracks.map((track) => (
             <TrackTile
                 key={track.id}
                 id={track.id}
                 name={track.name}
                 artist={track.artist}
                 albumArt={track.albumArt}
-                //userId={track.userId}
             />
         ))
     ) : (
@@ -67,7 +66,6 @@ const ProfileShow = props => {
     return (
         <div>
             {profileInfoSection}
-            {/* <p>Your Top Songs</p> */}
             {topSongs}
             <div className="container">
                 {trackTiles}
