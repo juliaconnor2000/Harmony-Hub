@@ -16,10 +16,10 @@ exports.up = async (knex) => {
         table.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
     })
 }
-
 /**
  * @param {Knex} knex
  */
+
 exports.down = async (knex) => {
     return knex.schema.dropTableIfExists("tracks")
 }

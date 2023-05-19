@@ -18,19 +18,19 @@ class Track extends Model {
         }
     }
 
-    // static get relationMappings() {
-    //     const { Review } = require("./index.js")
-    //     return {
-    //         reviews: {
-    //             relation: Model.HasManyRelation,
-    //             modelClass: Review,
-    //             join: {
-    //                 from: "stations.id",
-    //                 to: "reviews.stationId"
-    //             }
-    //         }
-    //     }
-    // }
+    static get relationMappings() {
+        const { Recommendation } = require("./index.js")
+        return {
+            recommendations: {
+                relation: Model.HasManyRelation,
+                modelClass: Recommendation,
+                join: {
+                    from: "tracks.id",
+                    to: "recommendations.trackId"
+                }
+            }
+        }
+    }
 }
 
 module.exports = Track

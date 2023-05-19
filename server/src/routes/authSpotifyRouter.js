@@ -74,7 +74,7 @@ authSpotifyRouter.get('/callback', function(req, res) {
           // var refresh_token = body.refresh_token;
   
           var options = {
-            url: 'https://api.spotify.com/v1/me/top/tracks',
+            url: 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term',
             headers: { 'Authorization': 'Bearer ' + access_token },
             json: true
           };

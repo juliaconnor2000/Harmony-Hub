@@ -1,30 +1,18 @@
-// import express from "express"
-// // import { Track } from "../../../models/index.js"
+import express from "express"
+import { User } from "../../../models/index.js"
 
-// const userInfoRouter = new express.Router()
+const userInfoRouter = new express.Router()
 
-// userInfoRouter.get('/', async (req, res) => {
-//     try {
-//         const userInfo = await Track.query().where({ userId: req.user.id })
-//         return res.status(200).json({ userInfo })
-//     }
-//     catch (err) {
-//         return res.status(500).json({ errors: err })
-//     }
-// })
+userInfoRouter.get("/:id", async (req, res) => {
+    // console.log(req.params)
+    const { id } = req.params
+    try {
+        const user = await User.query().findById(id)
+        return res.status(200).json({ user })
+    }
+    catch (err) {
+        return res.status(500).json({ errors: err })
+    }
+})
 
-// stationRouter.get("/", async (req, res) => {
-//     try {
-//         const stations = await Station.query()
-//         const serializedStations = await Promise.all(
-//             stations.map(async (station) => {
-//               return await StationSerializer.getSummary(station)
-//             })
-//           )
-//         return res.status(200).json({ stations: serializedStations })
-//     } catch (err) {
-//         return res.status(500).json({ errors: err })
-//     }
-// })
-
-// export default tracksRouter
+export default userInfoRouter

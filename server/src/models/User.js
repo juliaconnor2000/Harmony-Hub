@@ -41,6 +41,34 @@ class User extends uniqueFunc(Model) {
     };
   }
 
+  static get relationMappings() {
+    const { Recommendation } = require("./index.js")
+    return {
+      recommendations: {
+          relation: Model.HasManyRelation,
+          modelClass: Recommendation,
+          join: {
+              from: "users.id",
+              to: "recommendations.recommenderId"
+          }
+      }
+    }
+  }
+  
+  static get relationMappings() {
+    const { Recommendation } = require("./index.js")
+    return {
+      recommendations: {
+          relation: Model.HasManyRelation,
+          modelClass: Recommendation,
+          join: {
+              from: "users.id",
+              to: "recommendations.recommendeeId"
+          }
+      }
+    }
+  }
+
   $formatJson(json) {
     const serializedJson = super.$formatJson(json);
 
