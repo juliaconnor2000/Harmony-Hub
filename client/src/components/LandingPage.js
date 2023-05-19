@@ -1,51 +1,71 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import IndexTrackTile from "./IndexTrackTile.js"
 
 const LandingPage = props => {
 
-//     const [userInfo, setUserInfo] = useState([])
-//     const [shouldRedirect, setShouldRedirect] = useState(false)
+  const [tracks, setTracks] = useState([])
 
-//     const getUserInfo = async () => {
-//         try {
-//             // swap this with a fetch request to spotifyRouter
-//             // const response = await fetch (`/api/v1/authSpotifyRouter`, {
-//             const response = await fetch (`https://api.spotify.com`, {
-//                 method: "GET",
-//                 headers: new Headers({
-//                     "Authorization": "Bearer"
+  const getTracks = async() => {
+      try {
+          const response = await fetch (`/api/v1/tracks`)
+          if (!response.ok) {
+              throw(new Error(`${response.status} (${response.statusText})`))
+          }
+          const body = await response.json()
+          setTracks(body.tracks)
+      } catch (err) {
+          console.log(`Error in getTracks fetch: ${err.message}`)
+      }
+  }
 
-//                 }),
-//                 // body: JSON.stringify(response)
-//             })
-//             if (!response.ok) {
-//                 throw(new Error(`${response.status} (${response.statusText})`))
-//             }
-//             const body = await response.json()
-//             console.log(body)
-//             setUserInfo(body)
-//             setShouldRedirect(true) //brings us to profile page
-//         } catch (err) {
-//             console.log(`Error in getUserInfo fetch: ${err.message}`)
-//         }
-//         }
-    
-//     useEffect(() => {
-//         getUserInfo()
-//     }, [])
+  useEffect(() => {
+      getTracks()
+  }, [])
 
-//     // console.log(userInfo.country)
+  // tracks is now randomized
+  for (let i = tracks.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
+  }
 
-//     if (shouldRedirect){
-//         return <Redirect push to="/profile-page" />
-//     }
+  // array of 3 songs from each user
+  let arrayOfTracks = []
+  tracks.forEach(track => {
+    let alreadyExists = 0
+    arrayOfTracks.forEach(trackInArray => {
+      if (track.userId === trackInArray.userId) {
+        alreadyExists++
+      }
+    })
+    if (alreadyExists <= 3) {
+      arrayOfTracks.push(track)
+    }
+  })
+
+  const trackTile = arrayOfTracks.map(track => {
+    return (
+    <IndexTrackTile
+      key={track.id}
+      id={track.id}
+      name={track.name}
+      artist={track.artist}
+      albumArt={track.albumArt}
+      userId={track.userId}
+    />
+    )
+  })
+
+
+
+  // console.log(arrayOfTracks)
 
   return (
     <>
       <h1>Landing Page</h1>
-
-      {/* <a href="/auth/spotify" className="button">Sign in with Spotify</a> */}
- 
+      <div className="container">
+        {trackTile}
+      </div>
     </>
   );
 };

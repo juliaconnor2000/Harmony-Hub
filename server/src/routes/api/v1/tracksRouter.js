@@ -5,10 +5,18 @@ const tracksRouter = new express.Router()
 
 tracksRouter.get('/', async (req, res) => {
     try {
+        const tracks = await Track.query()
+        return res.status(200).json({ tracks })
+    } catch (err) {
+        return res.status(500).json({ errors: err })
+    }
+})
+
+tracksRouter.get('/user', async (req, res) => {
+    try {
         const tracks = await Track.query().where({ userId: req.user.id })
         return res.status(200).json({ tracks })
-    }
-    catch (err) {
+    } catch (err) {
         return res.status(500).json({ errors: err })
     }
 })

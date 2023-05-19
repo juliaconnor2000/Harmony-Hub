@@ -1,6 +1,6 @@
 import React from "react";
 
-const TrackTile = (props) => {
+const IndexTrackTile = (props) => {
     return (
         <div className="song-tile">
             <img src={props.albumArt} alt={`${props.name} Album Art`} className="img-format"/>
@@ -10,4 +10,4 @@ const TrackTile = (props) => {
     )
 }
 
-export default TrackTile
+export default IndexTrackTile
