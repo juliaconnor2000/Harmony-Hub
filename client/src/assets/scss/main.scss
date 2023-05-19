@@ -6,6 +6,39 @@ body {
   background-color: rgb(255, 204, 252);
 }
 
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.index-profile-text {
+  margin: 0;
+}
+
+.index-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+}
+
+.index-profile-section {
+  display: flex;
+  // flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 100px;
+}
+
+.index-profile-picture {
+  margin: 10px;
+  border-radius: 400px;
+  display: flex;
+  width: 60%;
+}
+
 .top-songs-text {
   width: 40%;
   font-size: 20px;
@@ -39,11 +72,11 @@ a {
   background-color: rgb(255, 38, 244)
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-}
+// .container {
+//   display: flex;
+//   flex-wrap: wrap;
+//   align-content: flex-start;
+// }
 
 .profile-container {
   display: flex;

@@ -23,8 +23,11 @@ const IndexTrackTile = (props) => {
     }, [])
 
     return (
-        <div className="song-tile">
-            <p className="text-tile">{user.email}</p>
+        <div className="song-tile-index index-section">
+            <div className="index-profile-section">
+                <img src={user.profilePicture} alt={`${user.displayName} Profile Picture`} className="index-profile-picture"/>
+                <p className="index-profile-text">{user.displayName}</p>
+            </div>
             <img src={props.albumArt} alt={`${props.name} Album Art`} className="img-format"/>
             <p className="tile-text">{props.name}</p>
             <p className="tile-text">{props.artist}</p>
