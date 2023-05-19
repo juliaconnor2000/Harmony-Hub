@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import SignOutButton from "../authentication/SignOutButton";
 
 const TopBar = ({ user }) => {
+
   const unauthenticatedListItems = [
     <li key="sign-in">
       <Link to="/user-sessions/new">Sign In</Link>
@@ -14,7 +15,18 @@ const TopBar = ({ user }) => {
     </li>,
   ];
 
+  let welcomeSection
+
+  if (user) {
+    welcomeSection = (
+      <li key={user.id}>
+        <Link to="/profile-page">Welcome {user.displayName}</Link>
+      </li>
+    )
+  }
+
   const authenticatedListItems = [
+    welcomeSection,
     <li key="sign-out">
       <SignOutButton />
     </li>,
@@ -24,7 +36,7 @@ const TopBar = ({ user }) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">App</li>
+          <li className="menu-text">Julia's Music Recommendations</li>
           <li>
             <Link to="/">Home</Link>
           </li>

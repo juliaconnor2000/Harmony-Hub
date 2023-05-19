@@ -2,6 +2,10 @@
 const Bcrypt = require("bcrypt");
 const unique = require("objection-unique");
 const Model = require("./Model");
+const findOrCreate = require("mongoose-findorcreate")
+const SpotifyStrategy = require('passport-spotify').Strategy;
+const passport = require('passport')
+
 
 const saltRounds = 10;
 
@@ -30,8 +34,39 @@ class User extends uniqueFunc(Model) {
       properties: {
         email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
         cryptedPassword: { type: "string" },
+        spotifyId: { type: ["string", "integer"] },
+        displayName: { type: "string" },
+        profilePicture: { type: "string" }
       },
     };
+  }
+
+  static get relationMappings() {
+    const { Recommendation } = require("./index.js")
+    return {
+      recommendations: {
+          relation: Model.HasManyRelation,
+          modelClass: Recommendation,
+          join: {
+              from: "users.id",
+              to: "recommendations.recommenderId"
+          }
+      }
+    }
+  }
+  
+  static get relationMappings() {
+    const { Recommendation } = require("./index.js")
+    return {
+      recommendations: {
+          relation: Model.HasManyRelation,
+          modelClass: Recommendation,
+          join: {
+              from: "users.id",
+              to: "recommendations.recommendeeId"
+          }
+      }
+    }
   }
 
   $formatJson(json) {

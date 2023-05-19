@@ -88,7 +88,7 @@ const RegistrationForm = () => {
   };
 
   if (shouldRedirect) {
-    location.href = "/";
+    location.href = "/profile-page";
   }
 
   return (
