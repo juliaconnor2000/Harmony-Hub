@@ -30,20 +30,20 @@ const LandingPage = props => {
   }
 
   // array of 3 songs from each user
-  let arrayOfTracks = []
-  tracks.forEach(track => {
-    let alreadyExists = 0
-    arrayOfTracks.forEach(trackInArray => {
-      if (track.userId === trackInArray.userId) {
-        alreadyExists++
-      }
-    })
-    if (alreadyExists <= 3) {
-      arrayOfTracks.push(track)
-    }
-  })
+  // let arrayOfTracks = []
+  // tracks.forEach(track => {
+  //   let alreadyExists = 0
+  //   arrayOfTracks.forEach(trackInArray => {
+  //     if (track.userId === trackInArray.userId) {
+  //       alreadyExists++
+  //     }
+  //   })
+  //   if (alreadyExists <= 3) {
+  //     arrayOfTracks.push(track)
+  //   }
+  // })
 
-  const trackTile = arrayOfTracks.map(track => {
+  const trackTile = tracks.map(track => {
     return (
     <IndexTrackTile
       key={track.id}
@@ -56,13 +56,9 @@ const LandingPage = props => {
     )
   })
 
-
-
-  // console.log(arrayOfTracks)
-
   return (
     <>
-      <h1>Landing Page</h1>
+      <h1 className="index-title">What Users Are Listening To</h1>
       <div className="container">
         {trackTile}
       </div>

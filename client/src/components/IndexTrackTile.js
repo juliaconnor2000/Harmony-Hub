@@ -29,8 +29,12 @@ const IndexTrackTile = (props) => {
                 <p className="index-profile-text">{user.displayName}</p>
             </div>
             <img src={props.albumArt} alt={`${props.name} Album Art`} className="img-format"/>
-            <p className="tile-text">{props.name}</p>
-            <p className="tile-text">{props.artist}</p>
+            <div className="index-song-section">
+                <p className="tile-text">{props.name}</p>
+                <p className="tile-text artist-text">{props.artist}</p>
+            </div>
+            {/* <p className="tile-text">{props.name}</p>
+            <p className="tile-text">{props.artist}</p> */}
         </div>
     )
 }
