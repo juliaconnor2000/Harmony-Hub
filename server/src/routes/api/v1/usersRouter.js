@@ -16,7 +16,7 @@ usersRouter.post("/", async (req, res) => {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data });
     }
-    return res.status(500).json({ error: errors.message });
+    return res.status(500).json({ errors: error.message });
   }
 });
 

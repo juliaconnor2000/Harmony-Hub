@@ -4,6 +4,66 @@
 
 body {
   background-color: rgb(255, 204, 252);
+  // background-color: black;
+}
+
+// p {
+//   color: white;
+// }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.index-title {
+  width: 50%;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: rgb(255, 38, 244)
+}
+
+.index-song-section {
+  margin: auto;
+  padding: 10px;
+}
+
+.index-profile-text {
+  margin: 0;
+}
+
+.artist-text {
+  font-size: small;
+  
+}
+
+.index-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+  margin: 10px;
+}
+
+.index-profile-section {
+  display: flex;
+  // flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 100px;
+  margin-right: 10px;
+}
+
+.index-profile-picture {
+  margin: 10px;
+  border-radius: 400px;
+  display: flex;
+  width: 60%;
 }
 
 .top-songs-text {
@@ -39,11 +99,11 @@ a {
   background-color: rgb(255, 38, 244)
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-}
+// .container {
+//   display: flex;
+//   flex-wrap: wrap;
+//   align-content: flex-start;
+// }
 
 .profile-container {
   display: flex;
@@ -90,6 +150,7 @@ a {
 }
 
 .tile-text {
+  margin: auto;
   max-width: 100%; 
   min-width: 150px;
   max-width: 150px; /* Adjust the maximum width as per your preference */
