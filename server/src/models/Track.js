@@ -13,7 +13,10 @@ class Track extends Model {
                 name: { type: "string" },
                 artist: { type: "string" },
                 albumArt: { type: "string" },
-                userId: { type: ["integer", "string"] }
+                userId: { anyOf: [{ type: "integer" }, { type: "string" }] },
+                trackAudio: { type: "string" }
+                // userId: { type: ["integer", "string"], allowUnionTypes: true },
+                // trackAudio: { type: ["string", "text"], allowUnionTypes: true }
             }
         }
     }

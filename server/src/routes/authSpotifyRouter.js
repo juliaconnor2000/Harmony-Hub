@@ -84,11 +84,13 @@ authSpotifyRouter.get('/callback', function(req, res) {
               const tracksData = body.items;
               const tracks = [];
               tracksData.forEach((trackData) => {
+                console.log(trackData)
                 const track = {
                   name: trackData.name,
                   artist: trackData.artists[0].name,
                   albumArt: trackData.album.images[0].url,
-                  userId: req.user.id // Assuming you have user authentication and req.user contains the authenticated user's data
+                  userId: req.user.id, // Assuming you have user authentication and req.user contains the authenticated user's data
+                  trackAudio: trackData.preview_url
                 };
     
                 tracks.push(track);
