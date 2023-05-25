@@ -113,11 +113,13 @@ const IndexTrackTile = (props) => {
                 <p className="tile-text">{props.name}</p>
                 <p className="tile-text artist-text">{props.artist}</p>
                 <AudioPlayer trackAudio={props.trackAudio}/>
-                <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
-
             </div>
-            <ErrorList errors={errors}/>
+            {/* <ErrorList errors={errors}/> */}
+            <div>
             {recommendationTiles}
+            <ErrorList errors={errors}/>
+            <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
+            </div>
         </div>
     )
 }

@@ -5,8 +5,9 @@ const ProfileShow = props => {
 
     const [userTracks, setUserTracks] = useState([])
 
-    const getUserTracks = async() => {
+    const getUserTracks = async () => {
         try {
+            console.log("hi")
             const response = await fetch (`/api/v1/tracks/user`)
             if (!response.ok) {
                 throw(new Error(`${response.status} (${response.statusText})`))
