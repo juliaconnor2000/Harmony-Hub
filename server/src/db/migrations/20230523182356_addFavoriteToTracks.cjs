@@ -7,7 +7,7 @@
  */
 exports.up = async (knex) => {
     return knex.schema.table("tracks", (table) => {
-        table.string("trackAudio").nullable()
+        table.boolean("favorite").defaultTo(false)
     })
 }
 
@@ -16,6 +16,6 @@ exports.up = async (knex) => {
  */
 exports.down = async (knex) => {
     return knex.schema.table("tracks", (table) => {
-        table.dropColumn("trackAudio")
+        table.dropColumn("favorite")
     })
 }

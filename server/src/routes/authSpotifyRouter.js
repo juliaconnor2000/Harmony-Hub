@@ -82,19 +82,22 @@ authSpotifyRouter.get('/callback', function(req, res) {
           request.get(options, async function(error, response, body) {
             if (!error && response.statusCode === 200) {
               const tracksData = body.items;
+              // console.log(body.items)
               const tracks = [];
               tracksData.forEach((trackData) => {
-                console.log(trackData)
+                // console.log(trackData)
                 const track = {
                   name: trackData.name,
                   artist: trackData.artists[0].name,
                   albumArt: trackData.album.images[0].url,
                   userId: req.user.id, // Assuming you have user authentication and req.user contains the authenticated user's data
-                  trackAudio: trackData.preview_url
+                  trackAudio: trackData.preview_url,
+                  favorite: false
                 };
     
                 tracks.push(track);
               });
+              console.log(tracks)
               try {
                 // Save tracks to the database
                 const savedTracks = await Track.query().insert(tracks);

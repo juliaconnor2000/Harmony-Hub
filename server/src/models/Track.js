@@ -8,15 +8,15 @@ class Track extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["name", "artist", "albumArt", "userId"],
+            required: ["name", "artist", "albumArt", "userId", "favorite"],
             properties: {
                 name: { type: "string" },
                 artist: { type: "string" },
                 albumArt: { type: "string" },
                 userId: { anyOf: [{ type: "integer" }, { type: "string" }] },
-                trackAudio: { type: "string" }
-                // userId: { type: ["integer", "string"], allowUnionTypes: true },
-                // trackAudio: { type: ["string", "text"], allowUnionTypes: true }
+                trackAudio: { anyOf: [{ type: "string" }, { type: "null" }] },
+                favorite: { type: "boolean" },
+                recommendations: { type: "array" }
             }
         }
     }

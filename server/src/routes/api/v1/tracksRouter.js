@@ -21,15 +21,10 @@ tracksRouter.get('/user', async (req, res) => {
     }
 })
 
-// stationRouter.get("/", async (req, res) => {
+// tracksRouter.get('/favorite', async (req, res) => {
 //     try {
-//         const stations = await Station.query()
-//         const serializedStations = await Promise.all(
-//             stations.map(async (station) => {
-//               return await StationSerializer.getSummary(station)
-//             })
-//           )
-//         return res.status(200).json({ stations: serializedStations })
+//         const track = await Track.query().findById(res.track.id).update({favorite: true})
+//         return res.status(200).json({track})
 //     } catch (err) {
 //         return res.status(500).json({ errors: err })
 //     }

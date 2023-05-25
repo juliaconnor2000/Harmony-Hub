@@ -30,6 +30,8 @@ const ProfileShow = props => {
                 name={track.name}
                 artist={track.artist}
                 albumArt={track.albumArt}
+                trackAudio={track.trackAudio}
+                favorite={track.favorite}
             />
         ))
     ) : (
@@ -40,8 +42,6 @@ const ProfileShow = props => {
     )
 
     let profileInfoSection = null
-
-    console.log(props.currentUser)
 
     if (props.currentUser && props.currentUser.profilePicture) {
         profileInfoSection = (
@@ -60,7 +60,6 @@ const ProfileShow = props => {
         topSongs = (
             <p className="top-songs-text">Your top songs</p>
         )
-
     }
 
     return (

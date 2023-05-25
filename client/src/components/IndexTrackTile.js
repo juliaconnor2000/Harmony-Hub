@@ -1,7 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import AudioPlayer from "./AudioPlayer.js";
+import NewRecommendationForm from "./NewRecommendationForm.js";
+// import ErrorList from "./ErrorList.js"
+import translateServerErrors from "../services/translateServerErrors.js"
 
 const IndexTrackTile = (props) => {
+
+    const [track, setTrack] = useState({
+            name: props.name,
+            artist: props.artist,
+            albumArt: props.albumArt,
+            userId: props.userId,
+            trackAudio: props.trackAudio,
+            // recommendations: props.recommendations
+        })
 
     const [user, setUser] = useState([])
 
@@ -22,8 +35,35 @@ const IndexTrackTile = (props) => {
         getUser()
     }, [])
 
+    const postNewRecommendation = async (newRecommendation) => {
+        try {
+            const response = await fetch(`/api/v1/tracks/${props.id}/recommendations`, {
+                method: "POST",
+                headers: new Headers({
+                    "Content-Type": "application/json"
+                }),
+                body: JSON.stringify(newRecommendation)
+            })
+            if (!response.ok) {
+                if (response.status === 422) {
+                    const errorBody = await response.json()
+                    return setErrors(translateServerErrors(errorBody.errors))
+                } else {
+                    throw new Error(`${response.status} (${response.statusText})`)
+                }
+            } else {
+                const responseBody = await response.json()
+                const updatedRecommendations = props.recommendations.concat(responseBody.recommendation)
+                setErrors([])
+                setTrack({...track, recommendations: updatedRecommendations})
+            }
+        } catch (error) {
+            console.error(`Error in postNewRecommendation fetch: ${error.message}`)
+        }
+    }
+
     return (
-        <div className="song-tile-index index-section">
+        <div className="index-section">
             <div className="index-profile-section">
                 <img src={user.profilePicture} alt={`${user.displayName} Profile Picture`} className="index-profile-picture"/>
                 <p className="index-profile-text">{user.displayName}</p>
@@ -32,9 +72,9 @@ const IndexTrackTile = (props) => {
             <div className="index-song-section">
                 <p className="tile-text">{props.name}</p>
                 <p className="tile-text artist-text">{props.artist}</p>
+                <AudioPlayer trackAudio={props.trackAudio}/>
             </div>
-            {/* <p className="tile-text">{props.name}</p>
-            <p className="tile-text">{props.artist}</p> */}
+            <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
         </div>
     )
 }
