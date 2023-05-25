@@ -7,14 +7,18 @@ body {
   // background-color: black;
 }
 
-// p {
-//   color: white;
-// }
-
 .container {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+}
+
+.recommendation-form {
+  font-size: xx-small;
+}
+
+.recommendation-form label {
+  font-size: xx-small;
 }
 
 .no-audio-text {

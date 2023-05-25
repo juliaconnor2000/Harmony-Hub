@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { Redirect } from "react-router-dom"
-import translateServerErrors from "../services/translateServerErrors"
-import ErrorList from "./layout/ErrorList.js"
 
 const NewRecommendationForm = ({postNewRecommendation}) => {
+    const [showForm, setShowForm] = useState(false);
+
     const [newRecommendation, setNewRecommendation] = useState ({
         recommendedTrack: "",
         recommendedArtist: "",
@@ -14,7 +13,8 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
     // const [shouldRedirect, setShouldRedirect] = useState(false)
 
     const handleInputChange = (event) => {
-        event.preventDefault()
+        // event.preventDefault()
+        // console.log(event.currentTarget.value)
         setNewRecommendation({
             ...newRecommendation,
             [event.currentTarget.name]: event.currentTarget.value
@@ -23,10 +23,9 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
 
     const clearForm = () => {
         setNewRecommendation({
-            body: "",
-            rating: "",
-            hasPolicePresence: null,
-            hasSittingWater: null,
+            recommendedTrack: "",
+            recommendedArtist: "",
+            textBody: "",
         })
     }
 
@@ -36,20 +35,36 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
         clearForm()
     }
 
+    const handleAddRecommendation = () => {
+        setShowForm(true);
+      };
+
+      const handleCloseRecommendation = () => {
+        setShowForm(false)
+      }
+    
+      if (!showForm) {
+        return (
+          <div>
+            <button onClick={handleAddRecommendation}>Add Recommendation</button>
+          </div>
+        );
+      }
+
     // if (shouldRedirect) {
     //     return <Redirect push to="/" />
     // }
 
     return (
-        <div>
-            <h1> Add Recommendation </h1>
+        <div className="recommendation-form">
+            <p>Add Recommendation</p>
             <form onSubmit={handleSubmit}>
                 <label>
                     Track: 
                     <input 
                         type="text"
-                        name="track"
-                        id="track"
+                        name="recommendedTrack"
+                        id="recommendedTrack"
                         onChange={handleInputChange}
                         value={newRecommendation.recommendedTrack}
                     />
@@ -59,8 +74,8 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
                     Artist:
                     <input 
                         type="text"
-                        name="artist"
-                        id="artist"
+                        name="recommendedArtist"
+                        id="recommendedArtist"
                         onChange={handleInputChange}
                         value={newRecommendation.recommendedArtist}
                     />
@@ -80,6 +95,8 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
                 <div>
                     <input className="button" type="submit" value="Submit" />
                 </div>
+                <button onClick={handleCloseRecommendation}>Close Form</button>
+
             </form>
         </div>
     )

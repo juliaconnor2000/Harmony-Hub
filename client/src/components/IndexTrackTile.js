@@ -2,8 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import AudioPlayer from "./AudioPlayer.js";
 import NewRecommendationForm from "./NewRecommendationForm.js";
-// import ErrorList from "./ErrorList.js"
+import ErrorList from "./layout/ErrorList.js";
 import translateServerErrors from "../services/translateServerErrors.js"
+import RecommendationTile from "./RecommendationTile.js";
 
 const IndexTrackTile = (props) => {
 
@@ -13,8 +14,10 @@ const IndexTrackTile = (props) => {
             albumArt: props.albumArt,
             userId: props.userId,
             trackAudio: props.trackAudio,
-            // recommendations: props.recommendations
+            recommendations: []
         })
+
+    const [errors, setErrors] = useState({})
 
     const [user, setUser] = useState([])
 
@@ -35,6 +38,24 @@ const IndexTrackTile = (props) => {
         getUser()
     }, [])
 
+    const getRecommendations = async () => {
+        try {
+            const response = await fetch (`/api/v1/tracks/${props.id}`)
+            if (!response.ok) {
+                throw(new Error(`${response.status} (${response.statusText})`))
+            }
+            const body = await response.json()
+            // console.log(body.track.recommendations)
+            setTrack({...track, recommendations: body.track.recommendations})
+        } catch (err) {
+            console.log(`Error in getUser fetch: ${err.message}`)
+        }
+    }
+  
+    useEffect(() => {
+        getRecommendations()
+    }, [])
+
     const postNewRecommendation = async (newRecommendation) => {
         try {
             const response = await fetch(`/api/v1/tracks/${props.id}/recommendations`, {
@@ -53,7 +74,7 @@ const IndexTrackTile = (props) => {
                 }
             } else {
                 const responseBody = await response.json()
-                const updatedRecommendations = props.recommendations.concat(responseBody.recommendation)
+                const updatedRecommendations = track.recommendations.concat(responseBody.recommendation)
                 setErrors([])
                 setTrack({...track, recommendations: updatedRecommendations})
             }
@@ -61,6 +82,33 @@ const IndexTrackTile = (props) => {
             console.error(`Error in postNewRecommendation fetch: ${error.message}`)
         }
     }
+
+    // console.log(track.recommendations)
+
+    const recommendationTiles = track.recommendations.length > 0 ? (
+        // console.log('recommendation')
+        track.recommendations.map((recommendation) => (
+            // console.log(recommendation)
+            <RecommendationTile
+                key={recommendation.id}
+                id={recommendation.id}
+                recommendedTrack={recommendation.recommendedTrack}
+                recommendedArtist={recommendation.recommendedArtist}
+                textBody={recommendation.textBody}
+                recommendeeId={recommendation.recommendeeId}
+                recommenderId={recommendation.recommenderId}
+                trackId={recommendation.trackId}
+            />
+        ))
+    ) : (
+        <p>No Reviews Here!</p>
+    )
+
+    // const recommendationTiles = track.recommendations.map(recommendation => {
+    //     <RecommendationTile
+    //         id={recommendation.id}
+    //     />
+    // })
 
     return (
         <div className="index-section">
@@ -74,7 +122,10 @@ const IndexTrackTile = (props) => {
                 <p className="tile-text artist-text">{props.artist}</p>
                 <AudioPlayer trackAudio={props.trackAudio}/>
             </div>
+            <ErrorList errors={errors}/>
             <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
+            {/* <RecommendationTile/> */}
+            {recommendationTiles}
         </div>
     )
 }

@@ -8,45 +8,45 @@ class Recommendation extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["recommenderId", "recommendeeId", "songId"],
+            required: ["recommenderId", "recommendeeId", "trackId"],
             properties: {
                 recommenderId: { type: ["integer", "string"] },
                 recommendeeId: { type: ["integer", "string"] },
-                songId: { type: ["integer", "string"] },
-                recommendedSong: { type: "string" },
+                trackId: { type: ["integer", "string"] },
+                recommendedTrack: { type: "string" },
                 recommendedArtist: { type: "string" },
                 textBody: { type: "string" }
             }
         }
     }
 
-    static get relationMappings() {
-        const { User } = require("./index.js")
-        return {
-            user: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: User,
-                join: {
-                    from: "recommendations.recommenderId",
-                    to: "users.id"
-                }
-            }
-        }
-    }
+    // static get relationMappings() {
+    //     const { User } = require("./index.js")
+    //     return {
+    //         user: {
+    //             relation: Model.BelongsToOneRelation,
+    //             modelClass: User,
+    //             join: {
+    //                 from: "recommendations.recommenderId",
+    //                 to: "users.id"
+    //             }
+    //         }
+    //     }
+    // }
 
-    static get relationMappings() {
-        const { User } = require("./index.js")
-        return {
-            user: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: User,
-                join: {
-                    from: "recommendations.recommendeeId",
-                    to: "users.id"
-                }
-            }
-        }
-    }
+    // static get relationMappings() {
+    //     const { User } = require("./index.js")
+    //     return {
+    //         user: {
+    //             relation: Model.BelongsToOneRelation,
+    //             modelClass: User,
+    //             join: {
+    //                 from: "recommendations.recommendeeId",
+    //                 to: "users.id"
+    //             }
+    //         }
+    //     }
+    // }
 
     static get relationMappings() {
         const { Track } = require("./index.js")
