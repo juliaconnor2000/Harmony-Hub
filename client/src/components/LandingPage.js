@@ -29,20 +29,6 @@ const LandingPage = props => {
     [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
   }
 
-  // array of 3 songs from each user
-  // let arrayOfTracks = []
-  // tracks.forEach(track => {
-  //   let alreadyExists = 0
-  //   arrayOfTracks.forEach(trackInArray => {
-  //     if (track.userId === trackInArray.userId) {
-  //       alreadyExists++
-  //     }
-  //   })
-  //   if (alreadyExists <= 3) {
-  //     arrayOfTracks.push(track)
-  //   }
-  // })
-
   const trackTile = tracks.map(track => {
     return (
     <IndexTrackTile
@@ -52,6 +38,7 @@ const LandingPage = props => {
       artist={track.artist}
       albumArt={track.albumArt}
       userId={track.userId}
+      trackAudio={track.trackAudio}
     />
     )
   })

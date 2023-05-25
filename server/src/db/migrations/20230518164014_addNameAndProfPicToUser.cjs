@@ -8,7 +8,7 @@
 exports.up = async (knex) => {
     return knex.schema.table("users", (table) => {
         table.string("displayName")
-        table.text("profilePicture")
+        table.string("profilePicture")
     })
 }
 

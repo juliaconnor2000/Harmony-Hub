@@ -4,7 +4,6 @@ import { User } from "../../../models/index.js"
 const userInfoRouter = new express.Router()
 
 userInfoRouter.get("/:id", async (req, res) => {
-    // console.log(req.params)
     const { id } = req.params
     try {
         const user = await User.query().findById(id)

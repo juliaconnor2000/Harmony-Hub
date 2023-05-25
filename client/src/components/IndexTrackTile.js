@@ -1,7 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import AudioPlayer from "./AudioPlayer.js";
+import NewRecommendationForm from "./NewRecommendationForm.js";
+import ErrorList from "./layout/ErrorList.js";
+import translateServerErrors from "../services/translateServerErrors.js"
+import RecommendationTile from "./RecommendationTile.js";
 
 const IndexTrackTile = (props) => {
+
+    const [track, setTrack] = useState({
+            name: props.name,
+            artist: props.artist,
+            albumArt: props.albumArt,
+            userId: props.userId,
+            trackAudio: props.trackAudio,
+            recommendations: []
+        })
+
+    const [errors, setErrors] = useState({})
 
     const [user, setUser] = useState([])
 
@@ -22,8 +38,72 @@ const IndexTrackTile = (props) => {
         getUser()
     }, [])
 
+    const getRecommendations = async () => {
+        try {
+            const response = await fetch (`/api/v1/tracks/${props.id}`)
+            if (!response.ok) {
+                throw(new Error(`${response.status} (${response.statusText})`))
+            }
+            const body = await response.json()
+            // console.log(body.track.recommendations)
+            setTrack({...track, recommendations: body.track.recommendations})
+        } catch (err) {
+            console.log(`Error in getUser fetch: ${err.message}`)
+        }
+    }
+  
+    useEffect(() => {
+        getRecommendations()
+    }, [])
+
+    const postNewRecommendation = async (newRecommendation) => {
+        try {
+            const response = await fetch(`/api/v1/tracks/${props.id}/recommendations`, {
+                method: "POST",
+                headers: new Headers({
+                    "Content-Type": "application/json"
+                }),
+                body: JSON.stringify(newRecommendation)
+            })
+            if (!response.ok) {
+                if (response.status === 422) {
+                    const errorBody = await response.json()
+                    return setErrors(translateServerErrors(errorBody.errors))
+                } else {
+                    throw new Error(`${response.status} (${response.statusText})`)
+                }
+            } else {
+                const responseBody = await response.json()
+                const updatedRecommendations = track.recommendations.concat(responseBody.recommendation)
+                setErrors([])
+                setTrack({...track, recommendations: updatedRecommendations})
+            }
+        } catch (error) {
+            console.error(`Error in postNewRecommendation fetch: ${error.message}`)
+        }
+    }
+
+    // console.log(track.recommendations)
+
+    const recommendationTiles = track.recommendations.length > 0 ? (
+        track.recommendations.map((recommendation) => (
+            <RecommendationTile
+                key={recommendation.id}
+                id={recommendation.id}
+                recommendedTrack={recommendation.recommendedTrack}
+                recommendedArtist={recommendation.recommendedArtist}
+                textBody={recommendation.textBody}
+                recommendeeId={recommendation.recommendeeId}
+                recommenderId={recommendation.recommenderId}
+                trackId={recommendation.trackId}
+            />
+        ))
+    ) : (
+        <p className="no-recommendations-yet">No Recommendations Yet!</p>
+    )
+
     return (
-        <div className="song-tile-index index-section">
+        <div className="index-section">
             <div className="index-profile-section">
                 <img src={user.profilePicture} alt={`${user.displayName} Profile Picture`} className="index-profile-picture"/>
                 <p className="index-profile-text">{user.displayName}</p>
@@ -32,9 +112,12 @@ const IndexTrackTile = (props) => {
             <div className="index-song-section">
                 <p className="tile-text">{props.name}</p>
                 <p className="tile-text artist-text">{props.artist}</p>
+                <AudioPlayer trackAudio={props.trackAudio}/>
+                <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
+
             </div>
-            {/* <p className="tile-text">{props.name}</p>
-            <p className="tile-text">{props.artist}</p> */}
+            <ErrorList errors={errors}/>
+            {recommendationTiles}
         </div>
     )
 }

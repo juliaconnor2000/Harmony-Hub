@@ -7,14 +7,38 @@ body {
   // background-color: black;
 }
 
-// p {
-//   color: white;
-// }
-
 .container {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+}
+
+.add-recommendation-button {
+  font-size: 10px;
+}
+
+.no-recommendations-yet {
+  font-size: 10px;
+}
+
+.recommendation-form {
+  font-size: xx-small;
+}
+
+.recommendation-form label {
+  font-size: xx-small;
+}
+
+.no-audio-text {
+  font-size: x-small;
+  margin: auto;
+}
+
+.play-pause-buttons button {
+  cursor: pointer;
+  &:hover {
+    color: rgb(255, 38, 244);
+  }
 }
 
 .index-title {
@@ -37,15 +61,23 @@ body {
 
 .artist-text {
   font-size: small;
-  
 }
 
 .index-section {
   display: flex;
   flex-wrap: wrap;
-  align-content: flex-start;
+  // align-content: flex-start;
+  align-content: center;
   align-items: center;
+  justify-content: center;
   margin: 10px;
+  // flex: 1;
+  // margin: 10px;
+  // padding: 10px;
+  // flex: 1;
+  // min-width: 300px; 
+  // display: flex;
+  // align-items: center; /* Center align children horizontally */
 }
 
 .index-profile-section {
