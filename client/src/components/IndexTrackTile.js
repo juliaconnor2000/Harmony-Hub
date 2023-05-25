@@ -86,9 +86,7 @@ const IndexTrackTile = (props) => {
     // console.log(track.recommendations)
 
     const recommendationTiles = track.recommendations.length > 0 ? (
-        // console.log('recommendation')
         track.recommendations.map((recommendation) => (
-            // console.log(recommendation)
             <RecommendationTile
                 key={recommendation.id}
                 id={recommendation.id}
@@ -101,14 +99,8 @@ const IndexTrackTile = (props) => {
             />
         ))
     ) : (
-        <p>No Reviews Here!</p>
+        <p className="no-recommendations-yet">No Recommendations Yet!</p>
     )
-
-    // const recommendationTiles = track.recommendations.map(recommendation => {
-    //     <RecommendationTile
-    //         id={recommendation.id}
-    //     />
-    // })
 
     return (
         <div className="index-section">
@@ -121,10 +113,10 @@ const IndexTrackTile = (props) => {
                 <p className="tile-text">{props.name}</p>
                 <p className="tile-text artist-text">{props.artist}</p>
                 <AudioPlayer trackAudio={props.trackAudio}/>
+                <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
+
             </div>
             <ErrorList errors={errors}/>
-            <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
-            {/* <RecommendationTile/> */}
             {recommendationTiles}
         </div>
     )

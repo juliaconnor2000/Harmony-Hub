@@ -14,16 +14,6 @@ const AudioPlayer = (props) => {
     setIsPlaying(false);
   };
 
-  // return (
-  //   <div className="play-pause-buttons">
-  //     <audio ref={audioRef} src={props.trackAudio} />
-  //     {isPlaying ? (
-  //       <button onClick={handlePause}>⏸</button>
-  //     ) : (
-  //       <button onClick={handlePlay}>▶</button>
-  //     )}
-  //   </div>
-  // );
   return (
     <div className="play-pause-buttons">
       {props.trackAudio ? (

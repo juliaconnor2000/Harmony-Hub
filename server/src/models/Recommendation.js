@@ -20,33 +20,33 @@ class Recommendation extends Model {
         }
     }
 
-    // static get relationMappings() {
-    //     const { User } = require("./index.js")
-    //     return {
-    //         user: {
-    //             relation: Model.BelongsToOneRelation,
-    //             modelClass: User,
-    //             join: {
-    //                 from: "recommendations.recommenderId",
-    //                 to: "users.id"
-    //             }
-    //         }
-    //     }
-    // }
+    static get relationMappings() {
+        const { User } = require("./index.js")
+        return {
+            user: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: User,
+                join: {
+                    from: "recommendations.recommenderId",
+                    to: "users.id"
+                }
+            }
+        }
+    }
 
-    // static get relationMappings() {
-    //     const { User } = require("./index.js")
-    //     return {
-    //         user: {
-    //             relation: Model.BelongsToOneRelation,
-    //             modelClass: User,
-    //             join: {
-    //                 from: "recommendations.recommendeeId",
-    //                 to: "users.id"
-    //             }
-    //         }
-    //     }
-    // }
+    static get relationMappings() {
+        const { User } = require("./index.js")
+        return {
+            user: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: User,
+                join: {
+                    from: "recommendations.recommendeeId",
+                    to: "users.id"
+                }
+            }
+        }
+    }
 
     static get relationMappings() {
         const { Track } = require("./index.js")

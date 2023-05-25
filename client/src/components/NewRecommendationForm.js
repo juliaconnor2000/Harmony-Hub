@@ -9,12 +9,7 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
         textBody: "",
     })
 
-    // const [errors, setErrors] = useState({})
-    // const [shouldRedirect, setShouldRedirect] = useState(false)
-
     const handleInputChange = (event) => {
-        // event.preventDefault()
-        // console.log(event.currentTarget.value)
         setNewRecommendation({
             ...newRecommendation,
             [event.currentTarget.name]: event.currentTarget.value
@@ -46,14 +41,10 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
       if (!showForm) {
         return (
           <div>
-            <button onClick={handleAddRecommendation}>Add Recommendation</button>
+            <button className="add-recommendation-button" onClick={handleAddRecommendation}>Add Recommendation</button>
           </div>
         );
       }
-
-    // if (shouldRedirect) {
-    //     return <Redirect push to="/" />
-    // }
 
     return (
         <div className="recommendation-form">
@@ -95,7 +86,7 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
                 <div>
                     <input className="button" type="submit" value="Submit" />
                 </div>
-                <button onClick={handleCloseRecommendation}>Close Form</button>
+                <button onClick={handleCloseRecommendation}>Collapse Form</button>
 
             </form>
         </div>

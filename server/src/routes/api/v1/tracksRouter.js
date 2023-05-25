@@ -20,7 +20,6 @@ tracksRouter.get("/:id", async (req, res) => {
     try {
         const track = await Track.query().findById(id)
         track.recommendations = await track.$relatedQuery("recommendations")
-        // console.log(track)
         return res.status(200).json({ track })
     } catch (err) {
         return res.status(500).json({ errors: err })
@@ -35,8 +34,6 @@ tracksRouter.get('/user', async (req, res) => {
         return res.status(500).json({ errors: err })
     }
 })
-
-// tracksRouter
 
 // tracksRouter.get('/favorite', async (req, res) => {
 //     try {

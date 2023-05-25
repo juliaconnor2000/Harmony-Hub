@@ -69,7 +69,6 @@ const ProfileShow = props => {
             <div className="container">
                 {trackTiles}
             </div>
-            {/* <p>recommendations under each song prolly</p> */}
         </div>
     )
 }

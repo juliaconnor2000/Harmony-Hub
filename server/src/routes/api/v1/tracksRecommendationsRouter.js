@@ -7,16 +7,14 @@ const { ValidationError } = objection
 const tracksRecommendationsRouter = new express.Router({ mergeParams: true })
 
 tracksRecommendationsRouter.post("/", async (req, res) => {
-    // console.log(req)
-    // console.log(req.params.id)
     const formInput = cleanUserInput(req.body)
     const { recommendedTrack, recommendedArtist, textBody } = formInput
     const trackId = req.params.id
-    // console.log(trackId)
     const track = await Track.query().findById(trackId)
-    console.log(track)
     const recommendeeId = track.userId
     const recommenderId = req.user.id
+    // const recommenderDisplayName = req.user.displayName 
+    // const recommenderProfilePicture = req.user.profilePicture 
     try {
         const newRecommendation = await Recommendation.query().insertAndFetch({
             recommenderId, recommendeeId, trackId, recommendedTrack, recommendedArtist, textBody
