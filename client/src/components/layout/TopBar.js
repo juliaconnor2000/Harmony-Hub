@@ -36,7 +36,7 @@ const TopBar = ({ user }) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">Julia's Music Recommendations</li>
+          <li className="menu-text">Harmony Hub</li>
           <li>
             <Link to="/">Home</Link>
           </li>
