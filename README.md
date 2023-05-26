@@ -15,10 +15,10 @@ https://localhost3000
     - PostgreSQL
 
 ### Installation
-    - Run `git clone https://github.com/juliaconnor2000/music-recommendations` in your terminal.
-    - Navigate to the app in your terminal: `cd music-recommendations`
+    - Run `git clone https://github.com/juliaconnor2000/Harmony-Hub` in your terminal.
+    - Navigate to the app in your terminal: `cd Harmony-Hub`
     - Navigate to the server folder to complete the following commands: `cd server`
-    - Create the database using postGresSQL: `createdb music-recommendations_development`
+    - Create the database using postGresSQL: `createdb harmony-hub_development`
     - run yarn install in your terminal before opening the app: `yarn install`
     - Run the following command to confirm migrations are up to date: `yarn migrate:latest`
     - start server by running: `yarn dev`
