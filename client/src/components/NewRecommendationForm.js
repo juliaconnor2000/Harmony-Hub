@@ -48,7 +48,7 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
 
     return (
         <div className="recommendation-form">
-            <p>Add Recommendation</p>
+            <p className="add-recommendation-text">Add Recommendation</p>
             <form onSubmit={handleSubmit}>
                 <label>
                     Track: 
@@ -86,7 +86,7 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
                 <div>
                     <input className="button" type="submit" value="Submit" />
                 </div>
-                <button onClick={handleCloseRecommendation}>Collapse Form</button>
+                <button className="close-recommendation-button" onClick={handleCloseRecommendation}>Collapse Form</button>
 
             </form>
         </div>

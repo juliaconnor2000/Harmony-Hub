@@ -3,8 +3,7 @@
 @include foundation-everything;
 
 body {
-  background-color: rgb(255, 204, 252);
-  // background-color: black;
+  font-family: Montserrat,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
 }
 
 .container {
@@ -13,21 +12,63 @@ body {
   align-content: flex-start;
 }
 
+.close-recommendation-button {
+  cursor: pointer;
+  &:hover {
+    color: #a8d09f;;
+  }
+  font-size: 12px;
+}
+
+.add-recommendation-text {
+  margin: auto;
+  margin-top: 5px;
+  font-size: 15px;
+}
+
 .add-recommendation-button {
-  font-size: 10px;
+  font-size: small;
+  cursor: pointer;
+  &:hover {
+    color: #cb7e1a;;
+  }
+  background-color: #f2ab51;
+  border-radius: 10px;
+  padding: 5px;
+  color: white;
+  border: 1px solid #cb7e1a;;
+}
+
+.show-recommendation-button {
+  background-color: #a8d09f;
+  font-size: small;
+  cursor: pointer;
+  &:hover {
+    color: #507b46;
+  }
+  border: 1px solid #6ea262;
+  border-radius: 10px;
+  padding: 5px;
+  color: white;
+  margin-bottom: 10px;
 }
 
 .no-recommendations-yet {
-  font-size: 10px;
+  font-size: small;
+  margin: auto;
 }
 
 .recommendation-form {
-  font-size: xx-small;
+  font-size: small;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px 0px;
 }
 
-.recommendation-form label {
-  font-size: xx-small;
-}
+// .recommendation-form label {
+//   font-size: xx-small;
+// }
 
 .no-audio-text {
   font-size: x-small;
@@ -37,17 +78,29 @@ body {
 .play-pause-buttons button {
   cursor: pointer;
   &:hover {
-    color: rgb(255, 38, 244);
+    color: #d84b99;
   }
 }
 
 .index-title {
+  // font-family: 'Exo', sans-serif;
+  // font-family: 'Pacifico', cursive;
+  // font-family: 'Bebas Neue', cursive;
+  // font-family: 'Oswald', sans-serif;
+  // font-family: 'Arial Black', Gadget, sans-serif;
+  // font-family: 'Courier New', Courier, monospace;
+  // font-family: Georgia, 'Times New Roman', serif;
+  // font-family: Verdana, Geneva, sans-serif;
+
+
   width: 50%;
   font-size: 30px;
+  font-weight: bold;
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  color: rgb(255, 38, 244)
+  margin-top: 30px;
+  margin-bottom: 30px;
+  // color: rgb(255, 38, 244);
+  color: #d84b99;
 }
 
 .index-song-section {
@@ -66,18 +119,10 @@ body {
 .index-section {
   display: flex;
   flex-wrap: wrap;
-  // align-content: flex-start;
   align-content: center;
   align-items: center;
-  justify-content: center;
   margin: 10px;
-  // flex: 1;
-  // margin: 10px;
-  // padding: 10px;
-  // flex: 1;
-  // min-width: 300px; 
-  // display: flex;
-  // align-items: center; /* Center align children horizontally */
+  justify-content: center;
 }
 
 .index-profile-section {
@@ -105,11 +150,19 @@ body {
 }
 
 .top-bar {
-  background-color: rgb(255, 150, 253);
+  background-color: #3d6b5a;
+  color: white;
 }
 
 .top-bar ul {
-  background-color:rgb(255, 150, 253);
+  background-color: #3d6b5a;
+  font-family: Montserrat,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+}
+
+.menu-text {
+  font-family: Verdana, Geneva, sans-serif;
+  // color: #a8d09f
+  // color: cream;
 }
 
 .download-section a {
@@ -124,11 +177,16 @@ body {
 }
 
 a {
-  color: rgb(255, 24, 216);
+  // color: rgb(255, 24, 216);
+  color: white;
+  cursor: pointer;
+  &:hover {
+    color: #a8d09f;;
+  }
 }
 
 .button {
-  background-color: rgb(255, 38, 244)
+  background-color: #d84b99
 }
 
 // .container {

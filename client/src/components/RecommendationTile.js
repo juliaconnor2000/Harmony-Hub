@@ -15,7 +15,7 @@ const RecommendationTile = (props) => {
       if (!showRecommendations) {
         return (
           <div>
-            <button className="add-recommendation-button" onClick={handleShowRecommendations}>Show Recommendations</button>
+            <button className="show-recommendation-button" onClick={handleShowRecommendations}>Show Recommendations</button>
           </div>
         );
       }

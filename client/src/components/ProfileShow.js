@@ -7,7 +7,6 @@ const ProfileShow = props => {
 
     const getUserTracks = async () => {
         try {
-            console.log("hi")
             const response = await fetch (`/api/v1/tracks/user`)
             if (!response.ok) {
                 throw(new Error(`${response.status} (${response.statusText})`))
