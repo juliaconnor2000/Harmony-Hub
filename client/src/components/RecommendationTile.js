@@ -1,43 +1,50 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 const RecommendationTile = (props) => {
 
-    const [showRecommendations, setShowRecommendations] = useState(false);
-    
-    const handleShowRecommendations = () => {
-        setShowRecommendations(true);
-      };
+  // console.log(props)
 
-      const handleCloseRecommendations = () => {
-        setShowRecommendations(false)
-      }
+  const [recommender, setRecommender] = useState([])
 
-      if (!showRecommendations) {
-        return (
-          <div>
-            <button className="add-recommendation-button" onClick={handleShowRecommendations}>Show Recommendations</button>
-          </div>
-        );
-      }
+    const getUser = async () => {
+        try {
+            const response = await fetch (`/api/v1/user-info/${props.recommenderId}`)
+            if (!response.ok) {
+                throw(new Error(`${response.status} (${response.statusText})`))
+            }
+            const body = await response.json()
+            setRecommender(body.user)
+        } catch (err) {
+            console.log(`Error in getUser fetch: ${err.message}`)
+        }
+    }
+  
+    useEffect(() => {
+        getUser()
+    }, [])
 
-    // const isSameUser = currentUser && currentUser.id === userId
+    console.log(recommender)
 
-    // const clickHandler = () => {
-    //     handleDeleteReview(reviewId)
-    // }
+    let textBodySection
+    if (props.textBody) {
+      textBodySection = (
+        <div className="recommendation-other-comments">
+          <p>Other Comments:</p>
+          <p>{props.textBody}</p>
+        </div>
+      )
+    }
 
     return (
+      <div className="recommendation-tile">
+        <img className="recommender-picture"src={recommender.profilePicture} alt={`${recommender.displayName} Profile Picture`}/>
+        <p className="recommender-name">{recommender.displayName} recommends:</p>
+        
         <div>
-
-            <p>{props.recommendedTrack}</p>
-            <p>{props.recommendedArtist}</p>
-            <p>{props.textBody}</p>
-        {/* {(isSameUser) && (
-            <button type="delete" className="button" onClick={clickHandler}>Delete</button>
-        )} */}
-            <button onClick={handleCloseRecommendations}>Collapse Recommendations</button>
-
+            <p className="recommendation-track">{props.recommendedTrack} by {props.recommendedArtist}</p>
+            {textBodySection}
         </div>
+      </div>
     )
 }
 
