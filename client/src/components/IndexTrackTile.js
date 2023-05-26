@@ -85,22 +85,63 @@ const IndexTrackTile = (props) => {
 
     // console.log(track.recommendations)
 
-    const recommendationTiles = track.recommendations.length > 0 ? (
-        track.recommendations.map((recommendation) => (
-            <RecommendationTile
-                key={recommendation.id}
-                id={recommendation.id}
-                recommendedTrack={recommendation.recommendedTrack}
-                recommendedArtist={recommendation.recommendedArtist}
-                textBody={recommendation.textBody}
-                recommendeeId={recommendation.recommendeeId}
-                recommenderId={recommendation.recommenderId}
-                trackId={recommendation.trackId}
-            />
-        ))
-    ) : (
-        <p className="no-recommendations-yet">No Recommendations Yet!</p>
-    )
+    const [showRecommendations, setShowRecommendations] = useState(false);
+    
+    const handleShowRecommendations = () => {
+        setShowRecommendations(true);
+      };
+
+      const handleCloseRecommendations = () => {
+        setShowRecommendations(false)
+      }
+
+      let recommendationTiles
+      let closeButton
+
+      if (track.recommendations.length === 0) {
+        recommendationTiles = (
+            <p className="no-recommendations-yet">No Recommendations Yet!</p>
+        )
+      } else if (!showRecommendations) {
+        recommendationTiles = (
+          <div>
+            <button className="show-recommendation-button" onClick={handleShowRecommendations}>Show Recommendations</button>
+          </div>
+        );
+      } else {
+        recommendationTiles = (
+            track.recommendations.map((recommendation) => (
+                <RecommendationTile
+                    key={recommendation.id}
+                    id={recommendation.id}
+                    recommendedTrack={recommendation.recommendedTrack}
+                    recommendedArtist={recommendation.recommendedArtist}
+                    textBody={recommendation.textBody}
+                    recommendeeId={recommendation.recommendeeId}
+                    recommenderId={recommendation.recommenderId}
+                    trackId={recommendation.trackId}
+                />
+            ))
+        )
+        closeButton = <button className="close-recommendation-button" onClick={handleCloseRecommendations}>Collapse Recommendations</button>
+      }
+
+    // recommendationTiles = track.recommendations.length > 0 ? (
+    //     track.recommendations.map((recommendation) => (
+    //         <RecommendationTile
+    //             key={recommendation.id}
+    //             id={recommendation.id}
+    //             recommendedTrack={recommendation.recommendedTrack}
+    //             recommendedArtist={recommendation.recommendedArtist}
+    //             textBody={recommendation.textBody}
+    //             recommendeeId={recommendation.recommendeeId}
+    //             recommenderId={recommendation.recommenderId}
+    //             trackId={recommendation.trackId}
+    //         />
+    //     ))
+    // ) : (
+    //     <p className="no-recommendations-yet">No Recommendations Yet!</p>
+    // )
 
     return (
         <div className="index-section">
@@ -117,6 +158,7 @@ const IndexTrackTile = (props) => {
             {/* <ErrorList errors={errors}/> */}
             <div>
             {recommendationTiles}
+            {closeButton}
             <ErrorList errors={errors}/>
             <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
             </div>

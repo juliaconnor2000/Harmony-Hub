@@ -12,6 +12,15 @@ body {
   align-content: flex-start;
 }
 
+.recommendation-tile {
+  background-color: #d84b99;
+  color: white;
+}
+
+.recommendation-tile p {
+  margin: auto;
+}
+
 .close-recommendation-button {
   cursor: pointer;
   &:hover {
@@ -64,6 +73,7 @@ body {
   border-radius: 10px;
   padding: 15px;
   margin: 10px 0px;
+  width:500px
 }
 
 // .recommendation-form label {
