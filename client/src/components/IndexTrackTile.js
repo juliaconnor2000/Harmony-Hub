@@ -159,6 +159,8 @@ const IndexTrackTile = (props) => {
             <div>
             {recommendationTiles}
             {closeButton}
+            </div>
+            <div>
             <ErrorList errors={errors}/>
             <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
             </div>
