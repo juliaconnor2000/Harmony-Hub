@@ -45,7 +45,6 @@ const IndexTrackTile = (props) => {
                 throw(new Error(`${response.status} (${response.statusText})`))
             }
             const body = await response.json()
-            // console.log(body.track.recommendations)
             setTrack({...track, recommendations: body.track.recommendations})
         } catch (err) {
             console.log(`Error in getUser fetch: ${err.message}`)
@@ -82,8 +81,6 @@ const IndexTrackTile = (props) => {
             console.error(`Error in postNewRecommendation fetch: ${error.message}`)
         }
     }
-
-    // console.log(track.recommendations)
 
     const [showRecommendations, setShowRecommendations] = useState(false);
     
@@ -126,23 +123,6 @@ const IndexTrackTile = (props) => {
         closeButton = <button className="close-recommendation-button" onClick={handleCloseRecommendations}>Collapse Recommendations</button>
       }
 
-    // recommendationTiles = track.recommendations.length > 0 ? (
-    //     track.recommendations.map((recommendation) => (
-    //         <RecommendationTile
-    //             key={recommendation.id}
-    //             id={recommendation.id}
-    //             recommendedTrack={recommendation.recommendedTrack}
-    //             recommendedArtist={recommendation.recommendedArtist}
-    //             textBody={recommendation.textBody}
-    //             recommendeeId={recommendation.recommendeeId}
-    //             recommenderId={recommendation.recommenderId}
-    //             trackId={recommendation.trackId}
-    //         />
-    //     ))
-    // ) : (
-    //     <p className="no-recommendations-yet">No Recommendations Yet!</p>
-    // )
-
     return (
         <div className="index-section">
             <div className="index-profile-section">
@@ -155,14 +135,13 @@ const IndexTrackTile = (props) => {
                 <p className="tile-text artist-text">{props.artist}</p>
                 <AudioPlayer trackAudio={props.trackAudio}/>
             </div>
-            {/* <ErrorList errors={errors}/> */}
             <div>
-            {recommendationTiles}
-            {closeButton}
+                {recommendationTiles}
+                {closeButton}
             </div>
             <div>
-            <ErrorList errors={errors}/>
-            <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
+                <ErrorList errors={errors}/>
+                <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
             </div>
         </div>
     )

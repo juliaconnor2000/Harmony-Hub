@@ -13,6 +13,18 @@ body {
   justify-content: center;
 }
 
+.recommender-picture {
+  // margin: 40px;
+  border-radius: 400px;
+  width: 50px
+  // display: flex;
+  // width: 25%;
+}
+
+.recommender-name {
+  font-size: 13px;
+}
+
 .recommendation-tile {
   border: 2px solid #a8d09f;
   border-radius: 10px;
@@ -82,6 +94,7 @@ body {
   font-size: small;
   margin: auto;
   padding: 0px 20px;
+//   width: 250px;
 }
 
 .recommendation-form {
@@ -230,8 +243,8 @@ a {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: rgb(255, 231, 253);
-  border: 2px solid;
+  background-color: #fbf6ee;
+  border: 2px solid #f2ab51;
   border-radius: 10px;
 }
 
