@@ -21,6 +21,8 @@ https://localhost3000
     - Create the database using postGresSQL: `createdb harmony-hub_development`
     - run yarn install in your terminal before opening the app: `yarn install`
     - Run the following command to confirm migrations are up to date: `yarn migrate:latest`
+    - open code 'code .' and in server/src/routes/SpotifyAuthRoute uncomment 'var redirect_uri = 'http://localhost:3000/auth/spotify/callback'' 
+
     - start server by running: `yarn dev`
 
 ### Usage:
