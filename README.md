@@ -20,11 +20,10 @@ https://harmony-hub.herokuapp.com/
     - Navigate to the app in your terminal: `cd Harmony-Hub`
     - Navigate to the server folder to complete the following commands: `cd server`
     - Create the database using postGresSQL: `createdb harmony-hub_development`
-    - run yarn install in your terminal before opening the app: `yarn install`
+    - Run yarn install in your terminal before opening the app: `yarn install`
     - Run the following command to confirm migrations are up to date: `yarn migrate:latest`
-    - open code 'code .' and in server/src/routes/SpotifyAuthRoute uncomment 'var redirect_uri = 'http://localhost:3000/auth/spotify/callback'' 
-
-    - start server by running: `yarn dev`
+    - Open code 'code .' and in server/src/routes/SpotifyAuthRoute uncomment 'var redirect_uri = 'http://localhost:3000/auth/spotify/callback'' 
+    - Start server by running: `yarn dev`
 
 ### Usage:
 Navigate to https://harmony-hub.herokuapp.com/ OR
