@@ -1,11 +1,11 @@
-### Boston T Stop Reviews
+### Harmony Hub
 Description: Welcome to Harmony Hub! This app allows users to download their top songs directly from their Spotify account, then share the music they listen to with other users. The user can then get music recommendations from other users and leave their own music recommendations!
 
 ### Author
 Julia Connor
 
 ### Site
-https://localhost3000
+https://harmony-hub.herokuapp.com/
 
 ### Technologies used: 
     - JavaScript
@@ -15,6 +15,7 @@ https://localhost3000
     - PostgreSQL
 
 ### Installation
+    - For https://localhost3000 installation
     - Run `git clone https://github.com/juliaconnor2000/Harmony-Hub` in your terminal.
     - Navigate to the app in your terminal: `cd Harmony-Hub`
     - Navigate to the server folder to complete the following commands: `cd server`
@@ -26,6 +27,7 @@ https://localhost3000
     - start server by running: `yarn dev`
 
 ### Usage:
-Navigate to https://localhost:300/
+Navigate to https://harmony-hub.herokuapp.com/ OR
+Follow installation guidelines and navigate to https://localhost:300/
 
 This was a solo capstone project done at Launch Academy. The goal of this project is to allow users to download their top songs from Spotify and get recommendations for new music from other users.
