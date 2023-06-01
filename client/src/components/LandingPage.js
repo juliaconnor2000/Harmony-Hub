@@ -39,6 +39,7 @@ const LandingPage = props => {
       albumArt={track.albumArt}
       userId={track.userId}
       trackAudio={track.trackAudio}
+      currentUser={props.currentUser}
     />
     )
   })

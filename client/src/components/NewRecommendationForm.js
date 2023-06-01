@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 
-const NewRecommendationForm = ({postNewRecommendation}) => {
+const NewRecommendationForm = ({postNewRecommendation, currentUser}) => {
     const [showForm, setShowForm] = useState(false);
 
     const [newRecommendation, setNewRecommendation] = useState ({
@@ -44,6 +44,15 @@ const NewRecommendationForm = ({postNewRecommendation}) => {
             <button className="add-recommendation-button" onClick={handleAddRecommendation}>Add Recommendation</button>
           </div>
         );
+      }
+
+      if ((showForm) & (currentUser === null)) {
+        return (
+            <div>
+                <button className="add-recommendation-button" onClick={handleAddRecommendation}>Add Recommendation</button>
+                <p className="login-to-add">Please Log In to Add Recommendation!</p>
+            </div>
+        )
       }
 
     return (

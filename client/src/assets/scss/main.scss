@@ -13,6 +13,13 @@ body {
   justify-content: center;
 }
 
+.login-to-add {
+  font-size: small;
+  margin: auto;
+  // padding: 0px 20px;
+//   width: 250px;
+}
+
 .recommender-picture {
   // margin: 40px;
   border-radius: 400px;
@@ -72,7 +79,7 @@ body {
   padding: 5px;
   color: white;
   border: 1px solid #cb7e1a;;
-  margin: 15px;
+  margin: 15px 15px 5px 15px;
 }
 
 .show-recommendation-button {
