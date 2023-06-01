@@ -55,6 +55,8 @@ const IndexTrackTile = (props) => {
         getRecommendations()
     }, [])
 
+    // console.log(props.currentUser)
+
     const postNewRecommendation = async (newRecommendation) => {
         try {
             const response = await fetch(`/api/v1/tracks/${props.id}/recommendations`, {
@@ -76,6 +78,7 @@ const IndexTrackTile = (props) => {
                 const updatedRecommendations = track.recommendations.concat(responseBody.recommendation)
                 setErrors([])
                 setTrack({...track, recommendations: updatedRecommendations})
+                setShowRecommendations(true)
             }
         } catch (error) {
             console.error(`Error in postNewRecommendation fetch: ${error.message}`)
@@ -141,7 +144,7 @@ const IndexTrackTile = (props) => {
             </div>
             <div>
                 <ErrorList errors={errors}/>
-                <NewRecommendationForm postNewRecommendation={postNewRecommendation}/>
+                <NewRecommendationForm postNewRecommendation={postNewRecommendation} currentUser={props.currentUser}/>
             </div>
         </div>
     )

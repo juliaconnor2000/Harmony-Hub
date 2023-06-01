@@ -10,7 +10,6 @@ var client_secret= process.env.CLIENT_SECRET
 // var redirect_uri = 'http://localhost:3000/auth/spotify/callback' 
 // ^^ uncomment for using on localhost
 var redirect_uri = 'https://harmony-hub.herokuapp.com/auth/spotify/callback'
-// var redirect_uri = 'https://harmony-hub.herokuapp.com/callback'
 
 var generateRandomString = function(length) {
     var text = '';
