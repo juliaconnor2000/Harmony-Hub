@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import IndexTrackTile from "./IndexTrackTile.js"
 
 const LandingPage = props => {
