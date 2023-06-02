@@ -4,14 +4,27 @@ const AudioPlayer = (props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
+  // console.log(props)
+
   const handlePlay = () => {
-    audioRef.current.play();
+    if (props.playingTrackAudio && props.playingTrackAudio.current) {
+      // Pause the currently playing track if it exists
+      props.playingTrackAudio.current.pause();
+    }
+  
+    if (audioRef && audioRef.current) {
+      // Play the clicked track
+      audioRef.current.play();
+    }
+  
     setIsPlaying(true);
+    props.setPlayingTrackAudio(audioRef);
   };
 
   const handlePause = () => {
     audioRef.current.pause();
     setIsPlaying(false);
+    props.setPlayingTrackAudio(null)
   };
 
   return (

@@ -6,6 +6,23 @@ const LandingPage = props => {
 
   const [tracks, setTracks] = useState([])
 
+  const [playingTrackAudio, setPlayingTrackAudio] = useState(null)
+  // useEffect(() => {
+  //   // Perform any side effects or updates here when playingTrackId changes
+  //   // This code will run whenever playingTrackId changes, but it won't trigger a full page refresh
+
+  //   // Example: console.log the new playingTrackId
+  //   console.log('playingTrackAudio changed:', playingTrackAudio);
+
+  //   // Example: make an API request or update other state variables
+  //   // ...
+
+  //   // Make sure to clean up any resources or subscriptions in the return function
+  //   return () => {
+  //     // Cleanup code (optional)
+  //   };
+  // }, [playingTrackAudio]);
+
   const getTracks = async() => {
       try {
           const response = await fetch (`/api/v1/tracks`)
@@ -23,11 +40,12 @@ const LandingPage = props => {
       getTracks()
   }, [])
 
-  // tracks is now randomized
-  for (let i = tracks.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
-  }
+  useEffect(() => {
+    for (let i = tracks.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
+    }
+  }, []);
 
   const trackTile = tracks.map(track => {
     return (
@@ -40,6 +58,8 @@ const LandingPage = props => {
       userId={track.userId}
       trackAudio={track.trackAudio}
       currentUser={props.currentUser}
+      setPlayingTrackAudio={setPlayingTrackAudio}
+      playingTrackAudio={playingTrackAudio}
     />
     )
   })

@@ -55,8 +55,6 @@ const IndexTrackTile = (props) => {
         getRecommendations()
     }, [])
 
-    // console.log(props.currentUser)
-
     const postNewRecommendation = async (newRecommendation) => {
         try {
             const response = await fetch(`/api/v1/tracks/${props.id}/recommendations`, {
@@ -136,7 +134,7 @@ const IndexTrackTile = (props) => {
             <div className="index-song-section">
                 <p className="tile-text">{props.name}</p>
                 <p className="tile-text artist-text">{props.artist}</p>
-                <AudioPlayer trackAudio={props.trackAudio}/>
+                <AudioPlayer trackAudio={props.trackAudio} trackId={props.id} setPlayingTrackAudio={props.setPlayingTrackAudio} playingTrackAudio={props.playingTrackAudio}/>
             </div>
             <div>
                 {recommendationTiles}
