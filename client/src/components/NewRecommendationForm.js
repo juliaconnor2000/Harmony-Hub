@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
-const NewRecommendationForm = ({postNewRecommendation, currentUser}) => {
+const NewRecommendationForm = ({postNewRecommendation, currentUser, setOpenRecommendationFormId, openRecommendationFormId, trackId}) => {
     const [showForm, setShowForm] = useState(false);
 
     const [newRecommendation, setNewRecommendation] = useState ({
@@ -33,11 +33,19 @@ const NewRecommendationForm = ({postNewRecommendation, currentUser}) => {
 
     const handleAddRecommendation = () => {
         setShowForm(true);
+        setOpenRecommendationFormId(trackId)
       };
 
       const handleCloseRecommendation = () => {
         setShowForm(false)
+        setOpenRecommendationFormId(null)
       }
+
+      useEffect(() => {
+        if (trackId !== openRecommendationFormId) {
+          setShowForm(false);
+        }
+      }, [trackId, openRecommendationFormId]);
     
       if (!showForm) {
         return (
