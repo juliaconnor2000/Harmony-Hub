@@ -146,7 +146,7 @@ const IndexTrackTile = (props) => {
                     playingTrackId={props.playingTrackId}
                 />
             </div>
-            <div>
+            <div className="recommendations-and-close">
                 {recommendationTiles}
                 {closeButton}
             </div>

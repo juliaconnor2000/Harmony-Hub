@@ -27,6 +27,7 @@ const NewRecommendationForm = ({postNewRecommendation, currentUser}) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         postNewRecommendation(newRecommendation)
+        setShowForm(false)
         clearForm()
     }
 

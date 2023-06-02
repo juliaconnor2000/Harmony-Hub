@@ -2,8 +2,6 @@ import React, {useState, useEffect} from "react";
 
 const RecommendationTile = (props) => {
 
-  // console.log(props)
-
   const [recommender, setRecommender] = useState([])
 
     const getUser = async () => {
@@ -22,8 +20,6 @@ const RecommendationTile = (props) => {
     useEffect(() => {
         getUser()
     }, [])
-
-    console.log(recommender)
 
     let textBodySection
     if (props.textBody) {
