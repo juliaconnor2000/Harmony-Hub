@@ -10,6 +10,7 @@ var client_secret= process.env.CLIENT_SECRET
 // var redirect_uri = 'http://localhost:3000/auth/spotify/callback' 
 // ^^ uncomment for using on localhost
 var redirect_uri = 'https://harmony-hub.herokuapp.com/auth/spotify/callback'
+// ^^ and comment this out
 
 var generateRandomString = function(length) {
     var text = '';
@@ -22,11 +23,6 @@ var generateRandomString = function(length) {
   };
 
 const authSpotifyRouter = new express.Router();
-
-// when a user clicks on the google login button, it will issue a request to this route.
-// passport.authenticate will redirect the user to Google to allow the sharing of their information. 
-// The "scope" tells google what pieces of information we wish to retrieve
-// authGoogleRouter.get('/', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 authSpotifyRouter.get('/', function(req, res) {
   var state = generateRandomString(16);
