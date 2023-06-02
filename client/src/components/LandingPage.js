@@ -5,6 +5,8 @@ import IndexTrackTile from "./IndexTrackTile.js"
 const LandingPage = props => {
 
   const [tracks, setTracks] = useState([])
+  const [playingTrackAudio, setPlayingTrackAudio] = useState(null)
+  const [playingTrackId, setPlayingTrackId] = useState(null);
 
   const getTracks = async() => {
       try {
@@ -23,11 +25,12 @@ const LandingPage = props => {
       getTracks()
   }, [])
 
-  // tracks is now randomized
-  for (let i = tracks.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
-  }
+  useEffect(() => {
+    for (let i = tracks.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
+    }
+  }, []);
 
   const trackTile = tracks.map(track => {
     return (
@@ -40,6 +43,10 @@ const LandingPage = props => {
       userId={track.userId}
       trackAudio={track.trackAudio}
       currentUser={props.currentUser}
+      setPlayingTrackAudio={setPlayingTrackAudio}
+      playingTrackAudio={playingTrackAudio}
+      setPlayingTrackId={setPlayingTrackId}
+      playingTrackId={playingTrackId}
     />
     )
   })
