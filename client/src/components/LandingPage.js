@@ -6,6 +6,7 @@ const LandingPage = props => {
   const [tracks, setTracks] = useState([])
   const [playingTrackAudio, setPlayingTrackAudio] = useState(null)
   const [playingTrackId, setPlayingTrackId] = useState(null);
+  const [openRecommendationFormId, setOpenRecommendationFormId] = useState(null)
 
   const getTracks = async() => {
       try {
@@ -29,7 +30,7 @@ const LandingPage = props => {
       const j = Math.floor(Math.random() * (i + 1));
       [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
     }
-  }, []);
+  }, [tracks]);
 
   const trackTile = tracks.map(track => {
     return (
@@ -46,6 +47,8 @@ const LandingPage = props => {
       playingTrackAudio={playingTrackAudio}
       setPlayingTrackId={setPlayingTrackId}
       playingTrackId={playingTrackId}
+      setOpenRecommendationFormId={setOpenRecommendationFormId}
+      openRecommendationFormId={openRecommendationFormId}
     />
     )
   })
