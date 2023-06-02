@@ -1,31 +1,41 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const AudioPlayer = (props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
-  // console.log(props)
-
   const handlePlay = () => {
     if (props.playingTrackAudio && props.playingTrackAudio.current) {
-      // Pause the currently playing track if it exists
       props.playingTrackAudio.current.pause();
     }
-  
     if (audioRef && audioRef.current) {
-      // Play the clicked track
       audioRef.current.play();
+    }
+    if (props.onPlay) {
+      props.onPlay(props.trackId);
     }
   
     setIsPlaying(true);
+    props.setPlayingTrackId(props.trackId)
     props.setPlayingTrackAudio(audioRef);
   };
 
   const handlePause = () => {
     audioRef.current.pause();
+    if (props.onPause) {
+      props.onPause(props.trackId);
+    }
+
     setIsPlaying(false);
+    props.setPlayingTrackId(null)
     props.setPlayingTrackAudio(null)
   };
+
+  useEffect(() => {
+    if (props.trackId !== props.playingTrackId) {
+      setIsPlaying(false);
+    }
+  }, [props.trackId, props.playingTrackId]);
 
   return (
     <div className="play-pause-buttons">

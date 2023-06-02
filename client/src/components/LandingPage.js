@@ -5,23 +5,8 @@ import IndexTrackTile from "./IndexTrackTile.js"
 const LandingPage = props => {
 
   const [tracks, setTracks] = useState([])
-
   const [playingTrackAudio, setPlayingTrackAudio] = useState(null)
-  // useEffect(() => {
-  //   // Perform any side effects or updates here when playingTrackId changes
-  //   // This code will run whenever playingTrackId changes, but it won't trigger a full page refresh
-
-  //   // Example: console.log the new playingTrackId
-  //   console.log('playingTrackAudio changed:', playingTrackAudio);
-
-  //   // Example: make an API request or update other state variables
-  //   // ...
-
-  //   // Make sure to clean up any resources or subscriptions in the return function
-  //   return () => {
-  //     // Cleanup code (optional)
-  //   };
-  // }, [playingTrackAudio]);
+  const [playingTrackId, setPlayingTrackId] = useState(null);
 
   const getTracks = async() => {
       try {
@@ -60,6 +45,8 @@ const LandingPage = props => {
       currentUser={props.currentUser}
       setPlayingTrackAudio={setPlayingTrackAudio}
       playingTrackAudio={playingTrackAudio}
+      setPlayingTrackId={setPlayingTrackId}
+      playingTrackId={playingTrackId}
     />
     )
   })
