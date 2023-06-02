@@ -4,6 +4,8 @@ import TrackTile from "./TrackTile.js";
 const ProfileShow = props => {
 
     const [userTracks, setUserTracks] = useState([])
+    const [playingTrackAudio, setPlayingTrackAudio] = useState(null)
+    const [playingTrackId, setPlayingTrackId] = useState(null);
 
     const getUserTracks = async () => {
         try {
@@ -32,6 +34,10 @@ const ProfileShow = props => {
                 albumArt={track.albumArt}
                 trackAudio={track.trackAudio}
                 favorite={track.favorite}
+                setPlayingTrackAudio={setPlayingTrackAudio}
+                playingTrackAudio={playingTrackAudio}
+                setPlayingTrackId={setPlayingTrackId}
+                playingTrackId={playingTrackId}
             />
         ))
     ) : (

@@ -120,7 +120,6 @@ const IndexTrackTile = (props) => {
                     trackId={recommendation.trackId}
                     onPlay={props.onPlay}
                     onPause={props.onPause}
-
                 />
             ))
         )
