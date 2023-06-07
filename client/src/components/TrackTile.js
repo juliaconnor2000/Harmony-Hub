@@ -1,6 +1,6 @@
 import React from "react";
 import AudioPlayer from "./AudioPlayer.js";
-// import FavoriteComponent from "./FavoriteComponent.js";
+import FavoriteComponent from "./FavoriteComponent.js";
 
 const TrackTile = (props) => {
     return (
@@ -16,7 +16,7 @@ const TrackTile = (props) => {
                 setPlayingTrackId={props.setPlayingTrackId}
                 playingTrackId={props.playingTrackId}
             />
-            {/* <FavoriteComponent track={props}/> */}
+            <FavoriteComponent track={props}/>
         </div>
     )
 }

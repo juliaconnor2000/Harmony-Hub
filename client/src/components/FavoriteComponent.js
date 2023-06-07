@@ -1,51 +1,54 @@
-// import React, { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 
-// const FavoriteComponent = (props) => {
-//   const [isFavorite, setIsFavorite] = useState(false);
+const FavoriteComponent = (props) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [track, setTrack] = useState(props.track)
 
-
-//   //   const makeFavorite = async () => {
-//   //     try {
-//   //         const response = await fetch (`/api/v1/tracks/favorite`)
-//   //         if (!response.ok) {
-//   //             throw(new Error(`${response.status} (${response.statusText})`))
-//   //         }
-//   //         const body = await response.json()
-//   //         setUser(body.track)
-//   //     } catch (err) {
-//   //         console.log(`Error in getUser fetch: ${err.message}`)
-//   //     }
+  console.log(props.track.id)
 
 
-//   // }
+    const makeFavorite = async () => {
+      try {
+          const response = await fetch (`/api/v1/tracks/${props.track.id}/favorite`)
+          if (!response.ok) {
+              throw(new Error(`${response.status} (${response.statusText})`))
+          }
+          const body = await response.json()
+          setTrack(body.track)
+      } catch (err) {
+          console.log(`Error in makeFavorite fetch: ${err.message}`)
+      }
+    }
 
-//   const handleUnFavorite = () => {
-//     const updatedTrack = {
-//       ...props.track,
-//       favorite: false,
-//     };
-//     updateTrackInDataSource(updatedTrack);
-//     setIsFavorite(false);
-//   };
+    console.log(track)
 
-//   const handleFavorite = () => {
-//     const updatedTrack = {
-//       ...props.track,
-//       favorite: true,
-//     };
-//     updateTrackInDataSource(updatedTrack);
-//     setIsFavorite(true);
-//   };
+  const handleUnFavorite = () => {
+    const updatedTrack = {
+      ...props.track,
+      favorite: false,
+    };
+    makeFavorite(updatedTrack);
+    setIsFavorite(false);
+  };
 
-//   return (
-//     <div>
-//       {isFavorite ? (
-//         <button onClick={handleUnFavorite}>★ Unfavorite this song</button>
-//       ) : (
-//         <button onClick={handleFavorite}>☆ Favorite this song</button>
-//       )}
-//     </div>
-//   );
-// }
+  const handleFavorite = () => {
+    const updatedTrack = {
+      ...props.track,
+      favorite: true,
+    };
+    makeFavorite(updatedTrack);
+    setIsFavorite(true);
+  };
 
-// export default FavoriteComponent;
+  return (
+    <div>
+      {isFavorite ? (
+        <button onClick={handleUnFavorite}>★ Unfavorite this song</button>
+      ) : (
+        <button onClick={handleFavorite}>☆ Favorite this song</button>
+      )}
+    </div>
+  );
+}
+
+export default FavoriteComponent;

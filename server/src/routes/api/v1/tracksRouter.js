@@ -22,6 +22,36 @@ tracksRouter.get("/user", async (req, res) => {
     }
 })
 
+// tracksRouter.get('/:id/favorite', async (req, res) => {
+//     // console.log(res.track.id)
+//     const { id } = req.params
+//     try {
+//         const track = await Track.query().findById(id)
+//         console.log(track)
+//         return res.status(200).json({track})
+//     } catch (err) {
+//         return res.status(500).json({ errors: err })
+//     }
+// })
+
+tracksRouter.put('/:id/favorite', async (req, res) => {
+    const { id } = req.params;
+    console.log(id)
+    try {
+      const track = await Track.query().findById(id);
+      if (!track) {
+        return res.status(404).json({ error: 'Track not found' });
+      }
+  
+      track.favorite = true;
+      await track.$query().patch();
+  
+      return res.status(200).json({ track });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
+
 tracksRouter.get("/:id", async (req, res) => {
     const { id } = req.params
     try {
