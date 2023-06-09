@@ -34,23 +34,23 @@ tracksRouter.get("/user", async (req, res) => {
 //     }
 // })
 
-tracksRouter.put('/:id/favorite', async (req, res) => {
-    const { id } = req.params;
-    console.log(id)
-    try {
-      const track = await Track.query().findById(id);
-      if (!track) {
-        return res.status(404).json({ error: 'Track not found' });
-      }
+// tracksRouter.put('/:id/favorite', async (req, res) => {
+//     const { id } = req.params;
+//     console.log(id)
+//     try {
+//       const track = await Track.query().findById(id);
+//       if (!track) {
+//         return res.status(404).json({ error: 'Track not found' });
+//       }
   
-      track.favorite = true;
-      await track.$query().patch();
+//       track.favorite = true;
+//       await track.$query().patch();
   
-      return res.status(200).json({ track });
-    } catch (err) {
-      return res.status(500).json({ error: err.message });
-    }
-  });
+//       return res.status(200).json({ track });
+//     } catch (err) {
+//       return res.status(500).json({ error: err.message });
+//     }
+//   });
 
 tracksRouter.get("/:id", async (req, res) => {
     const { id } = req.params
@@ -62,6 +62,38 @@ tracksRouter.get("/:id", async (req, res) => {
         return res.status(500).json({ errors: err })
     }
 })
+
+tracksRouter.get('/:id/favorite', async (req, res) => {
+    const { id } = req.params;
+    // console.log(id)
+    try {
+      const track = await Track.query().findById(id);
+      if (!track) {
+        return res.status(404).json({ error: 'Track not found' });
+      }
+      track.favorite = true;
+      await track.$query().patch();
+      return res.status(200).json({ track });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
+
+  tracksRouter.get('/:id/unfavorite', async (req, res) => {
+    const { id } = req.params;
+    // console.log(id)
+    try {
+      const track = await Track.query().findById(id);
+      if (!track) {
+        return res.status(404).json({ error: 'Track not found' });
+      }
+      track.favorite = false;
+      await track.$query().patch();
+      return res.status(200).json({ track });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
 
 tracksRouter.use("/:id/recommendations", tracksRecommendationsRouter)
 
