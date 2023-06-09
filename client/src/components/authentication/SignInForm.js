@@ -6,6 +6,7 @@ const SignInForm = () => {
   const [userPayload, setUserPayload] = useState({ email: "", password: "" });
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [errors, setErrors] = useState({});
+  const [invalidCredentialsSection, setInvalidCredentialsSection] = useState("");
 
   const validateInput = (payload) => {
     setErrors({});
@@ -46,11 +47,14 @@ const SignInForm = () => {
             })
           })
           if(!response.ok) {
+            if (response.status === 401) {
+              setInvalidCredentialsSection('Invalid credentials, please try again or sign up!')
+            }
             const errorMessage = `${response.status} (${response.statusText})`
-            const error = new Error(errorMessage)
-            throw(error)
+            throw(new Error(errorMessage))
           }
           const userData = await response.json()
+          setInvalidCredentialsSection("")
           setShouldRedirect(true)
         }
       } catch(err) {
@@ -73,6 +77,7 @@ const SignInForm = () => {
   return (
     <div className="grid-container" onSubmit={onSubmit}>
       <h1>Sign In</h1>
+      <p>{invalidCredentialsSection}</p>
       <form>
         <div>
           <label>
