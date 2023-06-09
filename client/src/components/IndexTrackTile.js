@@ -126,6 +126,11 @@ const IndexTrackTile = (props) => {
         closeButton = <button className="close-recommendation-button" onClick={handleCloseRecommendations}>Collapse Recommendations</button>
       }
 
+      let favoriteTile
+      if (props.favorite === true) {
+        favoriteTile = <p className="index-favorite-text"><span style={{ color: '#d84b99' }}>★</span> one of {user.displayName}'s favorites!</p>
+      }
+
     return (
         <div className="index-section">
             <div className="index-profile-section">
@@ -144,6 +149,7 @@ const IndexTrackTile = (props) => {
                     setPlayingTrackId={props.setPlayingTrackId}
                     playingTrackId={props.playingTrackId}
                 />
+                {favoriteTile}
             </div>
             <div className="recommendations-and-close">
                 {recommendationTiles}

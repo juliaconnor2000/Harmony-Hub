@@ -49,6 +49,7 @@ const LandingPage = props => {
       playingTrackId={playingTrackId}
       setOpenRecommendationFormId={setOpenRecommendationFormId}
       openRecommendationFormId={openRecommendationFormId}
+      favorite={track.favorite}
     />
     )
   })
