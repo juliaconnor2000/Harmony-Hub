@@ -29,7 +29,6 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        {/* <Route exact path="/" component={LandingPage} /> */}
         <Route exact path="/">
           <LandingPage currentUser={currentUser}/>
         </Route>
