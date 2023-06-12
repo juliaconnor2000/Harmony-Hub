@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import AudioPlayer from "./AudioPlayer.js";
 import NewRecommendationForm from "./NewRecommendationForm.js";
-import ErrorList from "./layout/ErrorList.js";
 import translateServerErrors from "../services/translateServerErrors.js"
 import RecommendationTile from "./RecommendationTile.js";
 
@@ -20,6 +19,10 @@ const IndexTrackTile = (props) => {
     const [errors, setErrors] = useState({})
 
     const [user, setUser] = useState([])
+
+    const [showRecommendations, setShowRecommendations] = useState(false);
+
+    const [showForm, setShowForm] = useState(false);
 
     const getUser = async () => {
         try {
@@ -67,6 +70,7 @@ const IndexTrackTile = (props) => {
             if (!response.ok) {
                 if (response.status === 422) {
                     const errorBody = await response.json()
+                    setShowForm(true)
                     return setErrors(translateServerErrors(errorBody.errors))
                 } else {
                     throw new Error(`${response.status} (${response.statusText})`)
@@ -79,11 +83,10 @@ const IndexTrackTile = (props) => {
                 setShowRecommendations(true)
             }
         } catch (error) {
+            setShowForm(true)
             console.error(`Error in postNewRecommendation fetch: ${error.message}`)
         }
     }
-
-    const [showRecommendations, setShowRecommendations] = useState(false);
     
     const handleShowRecommendations = () => {
         setShowRecommendations(true);
@@ -156,13 +159,15 @@ const IndexTrackTile = (props) => {
                 {closeButton}
             </div>
             <div>
-                <ErrorList errors={errors}/>
                 <NewRecommendationForm 
                     postNewRecommendation={postNewRecommendation} 
                     currentUser={props.currentUser}
                     trackId={props.id}
                     setOpenRecommendationFormId={props.setOpenRecommendationFormId}
                     openRecommendationFormId={props.openRecommendationFormId}
+                    errors={errors}
+                    showForm={showForm}
+                    setShowForm={setShowForm}
                 />
             </div>
         </div>
