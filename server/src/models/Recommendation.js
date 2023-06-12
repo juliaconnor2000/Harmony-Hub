@@ -8,7 +8,7 @@ class Recommendation extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["recommenderId", "recommendeeId", "trackId"],
+            required: ["recommenderId", "recommendeeId", "trackId", "recommendedTrack", "recommendedArtist"],
             properties: {
                 recommenderId: { type: ["integer", "string"] },
                 recommendeeId: { type: ["integer", "string"] },

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
+import ErrorList from "./layout/ErrorList.js";
 
-const NewRecommendationForm = ({postNewRecommendation, currentUser, setOpenRecommendationFormId, openRecommendationFormId, trackId}) => {
-    const [showForm, setShowForm] = useState(false);
+const NewRecommendationForm = ({postNewRecommendation, currentUser, setOpenRecommendationFormId, openRecommendationFormId, trackId, errors, showForm, setShowForm}) => {
 
     const [newRecommendation, setNewRecommendation] = useState ({
         recommendedTrack: "",
@@ -68,6 +68,7 @@ const NewRecommendationForm = ({postNewRecommendation, currentUser, setOpenRecom
         <div className="recommendation-form">
             <p className="add-recommendation-text">Add Recommendation</p>
             <form onSubmit={handleSubmit}>
+                <ErrorList errors={errors}/>
                 <label>
                     Track: 
                     <input 
