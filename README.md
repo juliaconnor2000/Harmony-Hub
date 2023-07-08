@@ -26,7 +26,6 @@ https://harmony-hub.herokuapp.com/
     - Start server by running: `yarn dev`
 
 ### Usage:
-Navigate to https://harmony-hub.herokuapp.com/ OR
 Follow installation guidelines and navigate to https://localhost:300/
 
 This was a solo capstone project done at Launch Academy. The goal of this project is to allow users to download their top songs from Spotify and get recommendations for new music from other users.
