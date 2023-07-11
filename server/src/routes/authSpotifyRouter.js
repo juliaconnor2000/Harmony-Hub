@@ -7,10 +7,7 @@ dotenv.config();
 var client_id= process.env.CLIENT_ID
 var client_secret= process.env.CLIENT_SECRET
 
-// var redirect_uri = 'http://localhost:3000/auth/spotify/callback' 
-// ^^ uncomment for using on localhost
-var redirect_uri = 'https://harmony-hub.herokuapp.com/auth/spotify/callback'
-// ^^ and comment this out
+var redirect_uri = 'http://localhost:3000/auth/spotify/callback' 
 
 var generateRandomString = function(length) {
     var text = '';
@@ -105,7 +102,7 @@ authSpotifyRouter.get('/callback', function(req, res) {
                         const user = await User.query().findById(req.user.id);
                         if (user) {
                           user.displayName = body.display_name;
-                          user.profilePicture = body.images[0].url;
+                          user.profilePicture = body.images[1].url;
                           await user.$query().patch()
                           console.log('User profile updated successfully');
                       res.redirect('/profile-page')
