@@ -4,9 +4,6 @@ Description: Welcome to Harmony Hub! This app allows users to download their top
 ### Author
 Julia Connor
 
-### Site
-https://harmony-hub.herokuapp.com/
-
 ### Technologies used: 
     - JavaScript
     - Express
